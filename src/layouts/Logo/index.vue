@@ -2,7 +2,7 @@
   <div class="logo-container flex-center">
     <a href="/">
       <img class="logo" alt="logo" src="/logo.png" />
-      <h1 class="title" v-if="!collapse">物流仓储后台管理</h1>
+      <h1 class="title" v-if="!collapse">视频直播后台管理</h1>
     </a>
   </div>
 </template>

@@ -1,8 +1,6 @@
-## 物流仓储后台管理系统
+## 视频直播后台管理系统
 
 采用 vue3 全家桶（vite+pinia+element-plus+vue-router@4）
-
-查看[更新日志](./CHANGELOG.md)
 
 ## 使用方式
 
@@ -23,3 +21,11 @@ pnpm run dev
 ```
 pnpm run build:prod
 ```
+
+## 接口文档
+
+apifox：https://5z6ejvyqg4.apifox.cn
+
+## 需求文档
+
+https://www.yuque.com/xiumubai/fe/brx37tvkkpytkyq2?singleDoc#
