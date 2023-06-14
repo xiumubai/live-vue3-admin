@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-03-03 15:58:03
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-05 17:45:23
+ * @LastEditTime: 2023-06-14 15:35:58
  * @Description: 系统账户接口
  */
 
@@ -19,8 +19,8 @@ import type { AclUser } from './types'
  */
 export function getAclUserList(params: AclUser.ReqAclUserListParams) {
   return http.get<PageRes<AclUser.ResAclUserList>>(
-    `/admin/acl/user/${params.pageNum}/${params.pageSize}`,
-    { username: params.username },
+    `/admin/acl/user/list`,
+    params,
   )
 }
 

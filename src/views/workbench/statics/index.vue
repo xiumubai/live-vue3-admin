@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import * as echarts from 'echarts'
 import { onMounted, ref } from 'vue'
-import { getStatics } from '@/api'
+// import { getStatics } from '@/api'
 const type = ref('week')
 const xDate = ref()
 const yDate1 = ref()
