@@ -57,7 +57,7 @@ export default defineComponent({
       }).then(async () => {
         await userStore.Logout()
         router.push({ path: LOGIN_URL, query: { redirect: route.fullPath } })
-        ElMessage.success('退出登录成功！')
+        ElMessage.success('退出成功！')
       })
     }
     return {

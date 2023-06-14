@@ -83,7 +83,7 @@ const proTable = ref()
 
 // *表格配置项
 const columns: ColumnProps[] = [
-  // { type: 'selection', fixed: 'left', width: 80 },
+  { type: 'selection', fixed: 'left', width: 80 },
   { type: 'index', label: '#', width: 80 },
   { prop: 'id', label: 'id' },
   {
@@ -100,15 +100,6 @@ const columns: ColumnProps[] = [
 
 // *查询参数
 const initParam = reactive({})
-
-// 处理返回的数据格式
-// const dataCallback = (data: any) => {
-//   return {
-//     list: data?.records, // 封装的table默认使用的是list，后端返回的是records
-//     total: data?.total,
-//   }
-// }
-
 // *新增、编辑、分配角色
 const drawerRef = ref()
 const openDrawer = async (
