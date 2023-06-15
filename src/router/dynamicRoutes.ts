@@ -102,4 +102,74 @@ export const dynamicRoutes: RouteRecordRaw[] = [
       },
     ],
   },
+  // 营销管理
+  {
+    name: 'MarketManager',
+    path: '/marketManager',
+    component: Layout,
+    redirect: '/marketManager/vip',
+    meta: {
+      title: '营销管理',
+      icon: 'Setting',
+    },
+    children: [
+      {
+        name: 'AdvertisementSetting',
+        path: '/marketManager/advertisementSetting',
+        component: () =>
+          import('@/views/market/advertisementSetting/index.vue'),
+        meta: {
+          title: '广告设置',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'AdvertisementSpaceSetting',
+        path: '/marketManager/advertisementSpaceSetting',
+        component: () =>
+          import('@/views/market/advertisementSpaceSetting/index.vue'),
+        meta: {
+          title: '广告位设置',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'VIPManager',
+        path: '/marketManager/vip',
+        component: () => import('@/views/market/vip/index.vue'),
+        meta: {
+          title: 'VIP设置',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'ProxyManager',
+        path: '/marketManager/proxyManager',
+        component: () => import('@/views/market/proxyManager/index.vue'),
+        meta: {
+          title: '代理设置',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'FreeVideoPermissionManager',
+        path: '/marketManager/freeVideoPermissionManager',
+        component: () =>
+          import('@/views/market/freeVideoPermissionManager/index.vue'),
+        meta: {
+          title: '免费视频权限设置',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'GiftManager',
+        path: '/marketManager/giftManager',
+        component: () => import('@/views/market/giftManager/index.vue'),
+        meta: {
+          title: '礼物管理',
+          icon: 'UserFilled',
+        },
+      },
+    ],
+  },
 ]
