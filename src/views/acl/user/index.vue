@@ -91,10 +91,11 @@ const columns: ColumnProps[] = [
     label: '用户名',
     search: { el: 'input', props: { placeholder: '输入用户名' } },
   },
-  { prop: 'name', label: '用户昵称' },
+  { prop: 'nickName', label: '用户昵称' },
   { prop: 'roleName', label: '角色列表' },
-  { prop: 'createTime', label: '创建时间', sortable: true },
-  { prop: 'updateTime', label: '更新时间', sortable: true },
+  { prop: 'phone', label: '联系方式', width: 120 },
+  { prop: 'createTime', label: '创建时间', sortable: true, width: 120 },
+  { prop: 'updateTime', label: '更新时间', sortable: true, width: 120 },
   { prop: 'operation', label: '操作', fixed: 'right', width: 280 },
 ]
 
