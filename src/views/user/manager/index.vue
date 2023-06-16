@@ -1,5 +1,5 @@
 <template>
-  <el-card>主播管理</el-card>
+  <el-card>房管管理</el-card>
 </template>
 <script setup lang="ts">
 // import { ref, reactive, toRefs, computed, watch } from 'vue'
