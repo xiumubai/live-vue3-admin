@@ -2,8 +2,8 @@
  * @Description: 广告设置页面
  * @Autor: codeBo
  * @Date: 2023-06-15 16:16:59
- * @LastEditors: gjzxlihaibo@163.com
- * @LastEditTime: 2023-06-16 17:30:17
+ * @LastEditors: 1547702880@@qq.com
+ * @LastEditTime: 2023-06-17 00:08:53
 -->
 <template>
   <div>
@@ -53,7 +53,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { reactive, ref } from 'vue'
 import { ColumnProps } from '@/components/ProTable/src/types'
 import EditModal from './components/EditModal.vue'
@@ -79,7 +79,17 @@ const columns: ColumnProps[] = [
     label: '广告名称',
     search: { el: 'input', props: { placeholder: '输入广告名称' } },
   },
-  { prop: 'smallPic', label: '缩略图' },
+  {
+    prop: 'smallPic',
+    label: '缩略图',
+    render: ({ row }) => {
+      return (
+        <>
+          <el-avatar size={50} src={row.smallPic} />
+        </>
+      )
+    },
+  },
   { prop: 'pageContainer', label: '页面' },
   { prop: 'order', label: '排序值', width: 120 },
   { prop: 'createTime', label: '创建时间', sortable: true, width: 120 },
