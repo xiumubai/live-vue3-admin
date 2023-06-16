@@ -1,11 +1,6 @@
 <template>
   <div>
-    <ProTable
-      ref="proTable"
-      :columns="columns"
-      :requestApi="getRoleList"
-      :dataCallback="dataCallback"
-    >
+    <ProTable ref="proTable" :columns="columns" :requestApi="getRoleList">
       <!-- Expand -->
       <template #tableHeader>
         <Auth :value="['btn.Role.add']">
@@ -84,15 +79,6 @@ const columns: ColumnProps[] = [
 ]
 
 const proTable = ref()
-
-// 处理返回的数据格式
-const dataCallback = (data: any) => {
-  return {
-    list: data?.records,
-    total: data?.total,
-  }
-}
-
 // 打开Dialog
 const DialogRef = ref()
 const openDialog = (title: string, rowData: Partial<Role.ResRoleList> = {}) => {

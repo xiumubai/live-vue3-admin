@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-03-10 11:31:11
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-03-30 10:22:42
+ * @LastEditTime: 2023-06-16 10:36:18
  * @Description: 角色接口
  */
 import http from '@/utils/http'
@@ -18,7 +18,7 @@ import type { Role } from './types'
  */
 export function getRoleList(params: Role.ReqRoleListParams) {
   return http.get<PageRes<Role.ResRoleList>>(
-    `/admin/acl/role/${params.pageNum}/${params.pageSize}`,
+    `/admin/acl/role/list/${params.pageSize}/${params.pageNum}`,
     { roleName: params.roleName },
   )
 }
