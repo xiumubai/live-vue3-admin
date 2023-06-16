@@ -26,7 +26,7 @@
         v-if="drawerProps.title !== '分配角色'"
       >
         <el-input
-          v-model="drawerProps.rowData!.name"
+          v-model="drawerProps.rowData!.nickName"
           placeholder="请填写用户昵称"
           clearable
         ></el-input>
@@ -50,6 +50,7 @@
         <el-checkbox
           v-model="state.checkAll"
           :indeterminate="state.isIndeterminate"
+          style="margin-right: 30px"
           @change="handleCheckAllChange"
         >
           全选
