@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-03-03 15:58:03
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-14 15:35:58
+ * @LastEditTime: 2023-06-16 10:11:22
  * @Description: 系统账户接口
  */
 
@@ -50,7 +50,7 @@ export function updateAclUser(params: AclUser.ResAclUserList) {
  * @returns {<PageRes<any>>}
  */
 export function deleteAclUserById(id: string) {
-  return http.delete<PageRes<any>>(`/admin/acl/user/remove/${id}`)
+  return http.delete<PageRes<any>>(`/admin/acl/user/delete/${id}`)
 }
 
 /**
@@ -59,7 +59,7 @@ export function deleteAclUserById(id: string) {
  * @returns {<PageRes<any>>}
  */
 export function batchAclUser(ids: string[]) {
-  return http.delete<PageRes<any>>(`/admin/acl/user/batchRemove`, ids)
+  return http.delete<PageRes<any>>(`/admin/acl/user/batchDelete`, ids)
 }
 
 /**
@@ -80,9 +80,5 @@ export function getUserRolesList(userId: string) {
  */
 export function assignUserRoles(params: AclUser.ReqAssignRoles) {
   // Post方法传递get参数的方式需要下面这么写
-  return http.post<PageRes<any>>(`/admin/acl/user/doAssignRole`, params)
-}
-
-export function getUserByKeyword(keyword: string) {
-  return http.get<PageRes<any>>(`/admin/acl/user/findByKeyword/${keyword}`)
+  return http.post<PageRes<any>>(`/admin/acl/user/doAssign`, params)
 }
