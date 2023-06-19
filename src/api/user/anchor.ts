@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-19 15:31:48
+ * @LastEditTime: 2023-06-19 16:01:38
  * @Description: 主播管理
  */
 
@@ -15,7 +15,7 @@ import type { IAnchor } from './types'
  * @param page
  * @param limit
  * @param roleName
- * @returns {<PageRes<ICreator.IResCreator>>}
+ * @returns {<PageRes<IAnchor.IResAnchor>>}
  */
 export function getAnchorList(params: IAnchor.IReqQuery) {
   return http.get<PageRes<IAnchor.IResAnchor>>(

@@ -62,46 +62,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-  // 权限管理
-  {
-    name: 'Acl',
-    path: '/acl',
-    component: Layout,
-    redirect: '/acl/user',
-    meta: {
-      title: '权限管理',
-      icon: 'Setting',
-    },
-    children: [
-      {
-        name: 'User',
-        path: '/acl/user',
-        component: () => import('@/views/acl/user/index.vue'),
-        meta: {
-          title: '用户管理',
-          icon: 'UserFilled',
-        },
-      },
-      {
-        name: 'Role',
-        path: '/acl/role',
-        component: () => import('@/views/acl/role/index.vue'),
-        meta: {
-          title: '角色管理',
-          icon: 'Avatar',
-        },
-      },
-      {
-        name: 'Permission',
-        path: '/acl/permission',
-        component: () => import('@/views/acl/permission/index.vue'),
-        meta: {
-          title: '菜单管理',
-          icon: 'Menu',
-        },
-      },
-    ],
-  },
+
   // 营销管理
   {
     name: 'MarketManager',
@@ -168,6 +129,146 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         meta: {
           title: '礼物管理',
           icon: 'UserFilled',
+        },
+      },
+    ],
+  },
+
+  // 内容管理
+  {
+    name: 'Content',
+    path: '/content',
+    component: Layout,
+    redirect: '/content/long-video',
+    meta: {
+      title: '内容管理',
+      icon: 'Menu',
+    },
+    children: [
+      {
+        name: 'LongVideo',
+        path: '/content/long-video',
+        component: () => import('@/views/content/longVideo/index.vue'),
+        meta: {
+          title: '长视频管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'ShortVideo',
+        path: '/content/short-video',
+        component: () => import('@/views/content/shortVideo/index.vue'),
+        meta: {
+          title: '短视频管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'Live',
+        path: '/content/live',
+        component: () => import('@/views/content/live/index.vue'),
+        meta: {
+          title: '直播管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'Post',
+        path: '/content/post',
+        component: () => import('@/views/content/post/index.vue'),
+        meta: {
+          title: '帖子管理',
+          icon: 'Grid',
+        },
+      },
+    ],
+  },
+  // app管理
+  {
+    name: 'Application',
+    path: '/app',
+    component: Layout,
+    redirect: '/app/channel',
+    meta: {
+      title: 'app管理',
+      icon: 'Menu',
+    },
+    children: [
+      {
+        name: 'Channel',
+        path: '/app/channel',
+        component: () => import('@/views/application/channel/index.vue'),
+        meta: {
+          title: '频道管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'VideoClass',
+        path: '/app/video-class',
+        component: () => import('@/views/application/videoClass/index.vue'),
+        meta: {
+          title: '长视频分类管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'VideoTag',
+        path: '/app/video-tag',
+        component: () => import('@/views/application/videoTag/index.vue'),
+        meta: {
+          title: '短视频标签管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'LiveClass',
+        path: '/app/live-class',
+        component: () => import('@/views/application/liveClass/index.vue'),
+        meta: {
+          title: '直播分类管理',
+          icon: 'Grid',
+        },
+      },
+    ],
+  },
+
+  // 权限管理 *此路由放在最后*
+  {
+    name: 'Acl',
+    path: '/acl',
+    component: Layout,
+    redirect: '/acl/user',
+    meta: {
+      title: '系统管理',
+      icon: 'Setting',
+    },
+    children: [
+      {
+        name: 'User',
+        path: '/acl/user',
+        component: () => import('@/views/acl/user/index.vue'),
+        meta: {
+          title: '用户管理',
+          icon: 'UserFilled',
+        },
+      },
+      {
+        name: 'Role',
+        path: '/acl/role',
+        component: () => import('@/views/acl/role/index.vue'),
+        meta: {
+          title: '角色管理',
+          icon: 'Avatar',
+        },
+      },
+      {
+        name: 'Permission',
+        path: '/acl/permission',
+        component: () => import('@/views/acl/permission/index.vue'),
+        meta: {
+          title: '菜单管理',
+          icon: 'Menu',
         },
       },
     ],
