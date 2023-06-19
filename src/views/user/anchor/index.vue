@@ -32,7 +32,6 @@ import { ColumnProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getAnchorList } from '@/api/user/anchor'
-// import type { GoodsInfo } from '@/api/base/types'
 
 const { BUTTONS } = useAuthButtons()
 

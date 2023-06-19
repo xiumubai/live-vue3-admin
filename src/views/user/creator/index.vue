@@ -42,7 +42,6 @@ import { ColumnProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getCreatorList } from '@/api/user/creator'
-// import type { GoodsInfo } from '@/api/base/types'
 
 const { BUTTONS } = useAuthButtons()
 
