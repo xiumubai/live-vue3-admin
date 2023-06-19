@@ -1,28 +1,56 @@
-/* 登录接口参数类型 */
-export interface LoginData {
-  username: string
-  password: string
-}
+import type { ReqPage } from '../types'
 
-export interface UserRes {
-  userId?: string
-  name: string
-  avatar: string
-  buttons: string[]
-  roles: string[]
-  routes: string[]
-}
+/**
+ * VIP等级
+ */
+export type Level = 'VIP' | 'SVIP'
 
-/** 用户权限数据类型 */
-export interface AuthInfo {
-  buttons: string[]
-  roles: string[]
-  routes: string[]
-}
+/**
+ * 性别
+ *
+ * 开启状态
+ */
+export type Empty = '0' | '1'
 
-/* 用户信息接口返回值类型 */
-export interface UserInfo {
-  userId?: string
-  name: string
-  avatar: string
+export namespace NormalMange {
+  export interface IReqQuery extends ReqPage {
+    name: string
+  }
+  export interface IResNormal {
+    /**
+     * 账户余额
+     */
+    account: number
+    authStatus: number
+    /**
+     * 头像
+     */
+    avatar: string
+    createTime?: string
+    id?: number
+    /**
+     * VIP等级
+     */
+    level: Level
+    /**
+     * 用户名
+     */
+    name: string
+    /**
+     * 在线状态
+     */
+    onlineStatus: number
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 性别
+     */
+    sex: Empty
+    /**
+     * 开启状态
+     */
+    status: Empty
+  }
 }

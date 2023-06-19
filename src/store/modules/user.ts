@@ -8,7 +8,7 @@
 import { defineStore } from 'pinia'
 import { getUserInfo, logout } from '@/api'
 import type { UserState } from './model/userModel'
-import type { UserInfo } from '@/api/user/types'
+import type { UserInfo } from '@/api/login/types'
 import { useAuthStore } from './auth'
 import { RESEETSTORE } from '@/utils/reset'
 export const useUserStore = defineStore({
