@@ -60,7 +60,6 @@ const columns: ColumnProps[] = [
     prop: 'avatar',
     label: '头像',
     width: 100,
-    fixed: 'left',
     render: ({ row }) => {
       return (
         <>
