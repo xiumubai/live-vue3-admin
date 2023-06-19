@@ -2,8 +2,8 @@
  * @Description: 广告设置页面
  * @Autor: codeBo
  * @Date: 2023-06-15 16:16:59
- * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-17 00:08:53
+ * @LastEditors: gjzxlihaibo@163.com
+ * @LastEditTime: 2023-06-19 15:32:47
 -->
 <template>
   <div>
@@ -15,6 +15,9 @@
     >
       <template #smallPic="scope">
         <el-image style="height: 50px" :src="scope.row.smallPic" fit="cover" />
+      </template>
+      <template #status="scope">
+        <el-switch v-model="scope.row.status" />
       </template>
       <template #tableHeader="scope">
         <el-button
@@ -94,7 +97,11 @@ const columns: ColumnProps[] = [
   { prop: 'order', label: '排序值', width: 120 },
   { prop: 'createTime', label: '创建时间', sortable: true, width: 120 },
   { prop: 'updateTime', label: '有效时间', sortable: true, width: 120 },
-  { prop: 'status', label: '状态' },
+  {
+    prop: 'status',
+    // 修改状态， 可以根据 row 找到修改的是哪一个的状态再调用接口
+    label: '状态',
+  },
   { prop: 'operation', label: '操作', fixed: 'right', width: 80 },
 ]
 

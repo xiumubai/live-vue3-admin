@@ -3,7 +3,7 @@
  * @Autor: codeBo
  * @Date: 2023-06-16 14:22:06
  * @LastEditors: gjzxlihaibo@163.com
- * @LastEditTime: 2023-06-16 17:19:43
+ * @LastEditTime: 2023-06-19 17:02:42
  */
 import type { ReqPage } from '../types'
 // 广告设置模块
@@ -32,6 +32,19 @@ export namespace AdSetting {
     advertisingName?: string
     id?: string
     order?: number
+  }
+}
+export namespace AdSpaceSetting {
+  export interface Data {
+    commentBottom: boolean
+    everyInvitationAdvertising: number
+    everyLiveCoverAdvertising: number
+    everyShortVideoAdvertising: number
+    forYouCommentAdvertising: number
+    homeAdvertisingFrequency: number
+    playVideoBottom: boolean
+    swpperBottom: boolean
+    topAdvertising: boolean
   }
 }
 
