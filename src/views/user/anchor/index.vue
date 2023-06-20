@@ -92,7 +92,7 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'createTime', label: '注册时间', width: 180 },
+  { prop: 'createTime', label: '认证时间', width: 180 },
   {
     prop: 'status',
     label: '状态',
