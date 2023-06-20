@@ -103,15 +103,15 @@ export const dynamicRoutes: RouteRecordRaw[] = [
           icon: 'UserFilled',
         },
       },
-      {
-        name: 'ProxyManager',
-        path: '/marketManager/proxyManager',
-        component: () => import('@/views/market/proxyManager/index.vue'),
-        meta: {
-          title: '代理设置',
-          icon: 'UserFilled',
-        },
-      },
+      // {
+      //   name: 'ProxyManager',
+      //   path: '/marketManager/proxyManager',
+      //   component: () => import('@/views/market/proxyManager/index.vue'),
+      //   meta: {
+      //     title: '代理设置',
+      //     icon: 'UserFilled',
+      //   },
+      // },
       {
         name: 'FreeVideoPermissionManager',
         path: '/marketManager/freeVideoPermissionManager',
