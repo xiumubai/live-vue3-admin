@@ -2,8 +2,8 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-20 10:04:54
- * @Description: 【频道管理
+ * @LastEditTime: 2023-06-20 14:27:29
+ * @Description: 创作等级管理
  */
 
 import http from '@/utils/http'

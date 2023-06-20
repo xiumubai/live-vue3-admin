@@ -127,3 +127,57 @@ export namespace IShortVideo {
     uploadTime: string
   }
 }
+
+export namespace ILive {
+  export interface IReqQuery extends ReqPage {
+    name: string
+  }
+  export interface IResLive {
+    /**
+     * 直播收益
+     */
+    account: number
+    /**
+     * 结束时间
+     */
+    andTime: string
+    createTime?: string
+    id?: number
+    /**
+     * 主播
+     */
+    liver: string
+    /**
+     * 直播状态
+     */
+    liveStatus: number
+    /**
+     * 直播间地址
+     */
+    liveUrl: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 直播间封面
+     */
+    postUrl: string
+    /**
+     * 开播时间
+     */
+    startTime: string
+    /**
+     * 开启状态
+     */
+    status: boolean
+    /**
+     * 标签
+     */
+    tagName: string
+    /**
+     * 标题
+     */
+    title: string
+  }
+}
