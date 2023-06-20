@@ -66,6 +66,36 @@ export namespace IVideoTag {
   }
 }
 
+export namespace IVideoClass {
+  export interface IReqQuery extends ReqPage {
+    name: string
+  }
+  export interface IResVideoClass {
+    createTime?: string
+    id?: number
+    /**
+     * 频道名称
+     */
+    name: string
+    /**
+     * 父级分类
+     */
+    parentName: string
+    /**
+     * 状态
+     */
+    status: boolean
+    /**
+     * 备注
+     */
+    mark: string
+  }
+  export interface IAllClassItem {
+    label: string
+    children: IAllClassItem[]
+  }
+}
+
 export namespace ICreateLevel {
   export interface IReqQuery extends ReqPage {
     name: string
