@@ -181,3 +181,61 @@ export namespace ILive {
     title: string
   }
 }
+
+export namespace IPost {
+  export interface IReqQuery extends ReqPage {
+    name: string
+  }
+  export interface IResPost {
+    /**
+     * 审核管理员
+     */
+    authName: string
+    /**
+     * 发布者
+     */
+    author: string
+    /**
+     * 审核状态
+     */
+    authStatus: number
+    /**
+     * 审核时间
+     */
+    authTime: string
+    createTime?: string
+    id?: number
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 头像
+     */
+    postUrl: string
+    /**
+     * 视频地址
+     */
+    src: string
+    /**
+     * 开启状态
+     */
+    status: boolean
+    /**
+     * 标签
+     */
+    tagName: string
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 帖子类型
+     */
+    typeName: string
+    /**
+     * 上传时间
+     */
+    uploadTime: string
+  }
+}
