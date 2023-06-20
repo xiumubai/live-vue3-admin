@@ -230,6 +230,15 @@ export const dynamicRoutes: RouteRecordRaw[] = [
           icon: 'Grid',
         },
       },
+      {
+        name: 'CreateLevel',
+        path: '/app/create-level',
+        component: () => import('@/views/application/createLevel/index.vue'),
+        meta: {
+          title: '创作等级管理',
+          icon: 'Grid',
+        },
+      },
     ],
   },
 

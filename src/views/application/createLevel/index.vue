@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ProTable ref="proTable" :columns="columns" :requestApi="getChannelList">
+    <ProTable
+      ref="proTable"
+      :columns="columns"
+      :requestApi="getCreateLevelList"
+    >
       <template #tableHeader>
         <el-button
           type="primary"
@@ -41,23 +45,26 @@ import { ref } from 'vue'
 import { ColumnProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getChannelList } from '@/api/application/channel'
+import { getCreateLevelList } from '@/api/application/createLevel'
 
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
 const columns: ColumnProps[] = [
-  { type: 'selection', fixed: 'left', width: 80 },
-  { type: 'index', label: '#', width: 80 },
-  { prop: 'id', label: 'UserId', width: 80 },
+  { prop: 'id', label: '编号', width: 80 },
+  { prop: 'level', label: '级别', width: 80 },
   {
-    prop: 'name',
-    label: '频道名称',
+    prop: 'title',
+    label: '等级标题',
     width: 120,
-    search: { el: 'input', props: { placeholder: '请输入频道名称' } },
+    search: { el: 'input', props: { placeholder: '请输入等级标题' } },
+    render: ({ row }) => {
+      return <el-tag>{row.title}</el-tag>
+    },
   },
-  { prop: 'page', label: '所属页面' },
-  { prop: 'order', label: '排序值' },
+  { prop: 'rate', label: '分成比例' },
+  { prop: 'longVideoNum', label: '长视频上传数量' },
+  { prop: 'shortVideoNum', label: '短视频上传数量' },
   { prop: 'createTime', label: '创建时间' },
   {
     prop: 'status',
