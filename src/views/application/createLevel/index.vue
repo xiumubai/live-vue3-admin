@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ProTable ref="proTable" :columns="columns" :requestApi="getLongVideoList">
+    <ProTable
+      ref="proTable"
+      :columns="columns"
+      :requestApi="getCreateLevelList"
+    >
       <template #tableHeader>
         <el-button
           type="primary"
@@ -41,57 +45,27 @@ import { ref } from 'vue'
 import { ColumnProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getLongVideoList } from '@/api/content/longVideo'
+import { getCreateLevelList } from '@/api/application/createLevel'
 
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
 const columns: ColumnProps[] = [
-  { type: 'selection', fixed: 'left', width: 80 },
-  // { type: 'index', label: '#', width: 80 },
-  { prop: 'id', label: 'Id', width: 80 },
+  { prop: 'id', label: '编号', width: 80 },
+  { prop: 'level', label: '级别', width: 80 },
   {
     prop: 'title',
-    label: '标题',
+    label: '等级标题',
     width: 120,
-    search: { el: 'input', props: { placeholder: '请输入标题名称' } },
-  },
-  {
-    prop: 'postUrl',
-    label: '封面',
-    width: 250,
+    search: { el: 'input', props: { placeholder: '请输入等级标题' } },
     render: ({ row }) => {
-      return (
-        <el-image
-          style="width: 200px; height: 100px"
-          src={row.postUrl}
-          fit="cover"
-        />
-      )
+      return <el-tag>{row.title}</el-tag>
     },
   },
-  {
-    prop: 'src',
-    label: '视频',
-    width: 100,
-    render: () => {
-      return <el-button type="primary">播放</el-button>
-    },
-  },
-  { prop: 'category', label: '分类' },
-  { prop: 'author', label: '上传者' },
-  { prop: 'phone', label: '手机号' },
-  {
-    prop: 'authStatus',
-    label: '审核状态',
-    width: 100,
-    render: ({ row }) => {
-      return row.authStatus === 0 ? '不通过' : '通过'
-    },
-  },
-  { prop: 'authName', label: '审核管理员', width: 120 },
-  { prop: 'uploadTime', label: '上传时间', width: 120 },
-  { prop: 'authTime', label: '审核时间', width: 120 },
+  { prop: 'rate', label: '分成比例' },
+  { prop: 'longVideoNum', label: '长视频上传数量' },
+  { prop: 'shortVideoNum', label: '短视频上传数量' },
+  { prop: 'createTime', label: '创建时间' },
   {
     prop: 'status',
     label: '状态',
