@@ -69,13 +69,38 @@ import {
   addAdSetting,
   updateAdSetting,
 } from '@/api/market/advertisementSetting'
-import { ProcessSocket } from '@/sdk/socket-process/process'
+//import { ProcessSocket } from '@/sdk/socket-process/process'
+import { SocketServer, subscribeMessage } from '@/sdk/socket-process/webSocket'
 
 // 调试长链接服务， 请 本地启动 src/sdk/server/io.js 服务进行调试， 感谢
-const socket = new ProcessSocket({ socketUrl: 'http://127.0.0.1:23456' })
+//const socket = new ProcessSocket({ socketUrl: 'http://127.0.0.1:23456' })
 const socketHandle = () => {
-  socket.sendMessage('传输给后端的消息')
+  //
+  subscribeMessage(
+    {
+      type: 'sedSystem',
+      params: {
+        params: '订阅数据',
+      },
+      callback: (message: any) => {
+        console.log(message, '返回数据')
+      },
+    },
+    SocketServer.SYSTEM,
+  )
 }
+subscribeMessage(
+  {
+    type: 'SYSTEM',
+    params: {
+      params: '订阅数据',
+    },
+    callback: (message: any) => {
+      console.log(message, '返回数据')
+    },
+  },
+  SocketServer.SYSTEM,
+)
 // *获取 ProTable 元素，调用其获取刷新数据方法
 const proTable = ref()
 

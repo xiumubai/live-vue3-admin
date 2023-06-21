@@ -35,6 +35,8 @@ import LayoutSideBar from './SideBar/index.vue'
 import LayoutNavBar from './NavBar/index.vue'
 import LayoutTabsBar from './TabsBar/index.vue'
 import ThemeDrawer from './NavBar/components/ThemeDrawer/index.vue'
+import { createWebSocket, SocketServer } from '@/sdk/socket-process/webSocket'
+import { useUserStore } from '@/store/modules/user'
 export default defineComponent({
   components: {
     LayoutFooter,
@@ -46,6 +48,7 @@ export default defineComponent({
   },
   setup() {
     const settingsStore = useSettingsStore()
+    const userStore = useUserStore()
     const collapse = computed(() => settingsStore.collapse)
     // 监听窗口大小变化，折叠侧边栏
     const screenWidth = ref(0)
@@ -58,10 +61,14 @@ export default defineComponent({
     }, 100)
 
     window.addEventListener('resize', listeningWindow, false)
-
+    createWebSocket('http://127.0.0.1:23456', SocketServer.SYSTEM, {
+      token: userStore.token,
+      name: userStore.userInfo?.name,
+    })
     onBeforeUnmount(() => {
       window.removeEventListener('resize', listeningWindow)
     })
+
     return {
       collapse,
     }

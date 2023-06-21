@@ -3,7 +3,7 @@ import { Server } from 'socket.io'
 const connectList = ['']
 
 const testRoomList = []
-
+let SYSTEM_CACHE = {}
 const httpServer = createServer()
 
 const io = new Server(httpServer, {
@@ -31,7 +31,27 @@ io.on('connection', (socket) => {
   })
   // 收到消息 ， 参数就是前端传过来了， 1,2,3 这样排列，回调函数可以放在任意位置， cb 消息
   socket.on('my_event', (res) => {
+    socket.emit('broadcast', {
+      message: res,
+    })
     console.log('收到消息', res)
+  })
+  socket.on('SYSTEM', (res) => {
+    const { params } = res
+    console.log(params)
+
+    console.log('收到SYSTEM消息', res)
+  })
+  socket.on('sedSystem', (res) => {
+    const { params, subscriptionId } = res
+    console.log(params)
+    if (subscriptionId) {
+      SYSTEM_CACHE[subscriptionId] = { ...res }
+    }
+
+    io.local.emit('SYSTEM', `收到用户:${params.name},在${params.time}`)
+
+    SYSTEM_CACHE = {}
   })
   socket.on('leave', (arg) => {
     // console.log(`socket ${arg.id} has leave room ${arg.room}`);
