@@ -3,7 +3,7 @@
  * @Autor: codeBo
  * @Date: 2023-06-15 16:16:59
  * @LastEditors: gjzxlihaibo@163.com
- * @LastEditTime: 2023-06-19 15:32:47
+ * @LastEditTime: 2023-06-21 10:28:59
 -->
 <template>
   <div>
@@ -38,6 +38,7 @@
         >
           批量删除
         </el-button>
+        <el-button @click="socketHandle">调试长链接</el-button>
       </template>
       <!-- 表格操作 -->
       <template #operation="scope">
@@ -68,7 +69,13 @@ import {
   addAdSetting,
   updateAdSetting,
 } from '@/api/market/advertisementSetting'
+import { ProcessSocket } from '@/sdk/socket-process/process'
 
+// 调试长链接服务， 请 本地启动 src/sdk/server/io.js 服务进行调试， 感谢
+const socket = new ProcessSocket({ socketUrl: 'http://127.0.0.1:23456' })
+const socketHandle = () => {
+  socket.sendMessage('传输给后端的消息')
+}
 // *获取 ProTable 元素，调用其获取刷新数据方法
 const proTable = ref()
 

@@ -2,13 +2,14 @@
  * @Description:
  * @Autor: codeBo
  * @Date: 2023-03-03 15:37:08
- * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-03-09 10:01:43
+ * @LastEditors: gjzxlihaibo@163.com
+ * @LastEditTime: 2023-06-21 10:24:50
  */
 declare type Nullable<T> = T | null
 declare type NonNullable<T> = T extends null | undefined ? never : T
 declare type Recordable<T = any> = Record<string, T>
 declare module 'path-browserify'
+declare module 'socket.io-client'
 // * Vite
 declare interface ViteEnv {
   NODE_ENV: string
