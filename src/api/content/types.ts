@@ -88,7 +88,12 @@ export namespace ILongVideo {
 
 export namespace IShortVideo {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    author: string
+    authStatus: string
+    tagName: string
+    uploadTime: string[]
+    authTime: string[]
   }
   export interface IResShortVideo {
     /**
@@ -196,9 +201,7 @@ export namespace ILive {
 }
 
 export namespace IPost {
-  export interface IReqQuery extends ReqPage {
-    name: string
-  }
+  export type IReqQuery = ReqPage
   export interface IResPost {
     /**
      * 审核管理员
