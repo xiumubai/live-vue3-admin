@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-19 16:01:38
+ * @LastEditTime: 2023-06-25 10:47:11
  * @Description: 主播管理
  */
 
@@ -18,8 +18,19 @@ import type { IAnchor } from './types'
  * @returns {<PageRes<IAnchor.IResAnchor>>}
  */
 export function getAnchorList(params: IAnchor.IReqQuery) {
+  const startTime =
+    params.createTime && params.createTime.length > 0 && params.createTime[0]
+  const endTime =
+    params.createTime && params.createTime.length > 0 && params.createTime[1]
   return http.get<PageRes<IAnchor.IResAnchor>>(
     `/admin/user/anchor/list/${params.pageSize}/${params.pageNum}`,
-    { name: params.name },
+    {
+      name: params.name,
+      phone: params.phone,
+      sex: params.sex,
+      liveTimes: params.liveTimes,
+      startTime,
+      endTime,
+    },
   )
 }

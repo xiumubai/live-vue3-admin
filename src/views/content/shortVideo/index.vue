@@ -37,11 +37,12 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getShortVideoList } from '@/api/content/shortVideo'
+import { getShortVideoList, getTagList } from '@/api/content/shortVideo'
+import { AUTHSTATUSLIST } from '@/utils/constant'
 
 const { BUTTONS } = useAuthButtons()
 
@@ -78,8 +79,20 @@ const columns: ColumnProps[] = [
       return <el-button type="primary">播放</el-button>
     },
   },
-  { prop: 'tagName', label: '标签' },
-  { prop: 'author', label: '上传者' },
+  {
+    prop: 'tagName',
+    label: '标签',
+    enum: getTagList,
+    search: { el: 'select', props: { placeholder: '请选择标签' } },
+    render: ({ row }) => {
+      return <span>{row.tagName}</span>
+    },
+  },
+  {
+    prop: 'author',
+    label: '上传者',
+    search: { el: 'input', props: { placeholder: '请输入上传者名称' } },
+  },
   { prop: 'phone', label: '手机号' },
   {
     prop: 'authStatus',
@@ -88,22 +101,36 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.authStatus === 0 ? '不通过' : '通过'
     },
+    enum: computed(() => {
+      return AUTHSTATUSLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择审核状态' } },
   },
   { prop: 'authName', label: '审核管理员', width: 120 },
-  { prop: 'uploadTime', label: '上传时间', width: 120 },
-  { prop: 'authTime', label: '审核时间', width: 120 },
+  {
+    prop: 'uploadTime',
+    label: '上传时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
+  {
+    prop: 'authTime',
+    label: '审核时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   {
     prop: 'status',
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return (
-        <el-switch
-          v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-        />
-      )
+      return <el-switch v-model={row.status} />
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },

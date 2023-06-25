@@ -37,11 +37,12 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getCreatorList } from '@/api/user/creator'
+import { SEXLIST, VIPLEVEL } from '@/utils/constant'
 
 const { BUTTONS } = useAuthButtons()
 
@@ -67,7 +68,12 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'phone', label: '手机号', width: 140 },
+  {
+    prop: 'phone',
+    label: '手机号',
+    width: 140,
+    search: { el: 'input', props: { placeholder: '请输入手机号' } },
+  },
   {
     prop: 'sex',
     label: '性别',
@@ -75,8 +81,21 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.sex === 0 ? '男' : '女'
     },
+    fieldNames: { label: 'name', value: 'id' },
+    enum: computed(() => {
+      return SEXLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择性别' } },
   },
-  { prop: 'level', label: '创作等级', width: 100 },
+  {
+    prop: 'level',
+    label: '创作等级',
+    width: 100,
+    enum: computed(() => {
+      return VIPLEVEL || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
+  },
   { prop: 'longVideoNum', label: '长视频数量', width: 100 },
   { prop: 'shortVideoNum', label: '断视频数量', width: 100 },
   {
@@ -85,13 +104,22 @@ const columns: ColumnProps[] = [
     width: 100,
     render: ({ row }) => {
       return row.onlineStatus === 0 ? (
-        <el-tag type="success">离线</el-tag>
+        <el-tag type="success">在线</el-tag>
       ) : (
         <el-tag type="info">离线</el-tag>
       )
     },
   },
-  { prop: 'createTime', label: '注册时间', width: 180 },
+  {
+    prop: 'createTime',
+    label: '注册时间',
+    width: 180,
+    search: {
+      el: 'date-picker',
+      span: 2,
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
 ]
 

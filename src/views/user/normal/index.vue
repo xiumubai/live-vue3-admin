@@ -37,12 +37,15 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getNormalUserList } from '@/api/user/normal'
-
+import { changeStatus } from '@/api/common/index'
+import { SEXLIST, VIPLEVEL } from '@/utils/constant'
+import { useHandleData } from '@/hooks/useHandleData'
+// import type { INormalMange } from '@/api/user/types'
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -67,7 +70,12 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'phone', label: '手机号', width: 140 },
+  {
+    prop: 'phone',
+    label: '手机号',
+    width: 140,
+    search: { el: 'input', props: { placeholder: '请输入手机号' } },
+  },
   {
     prop: 'sex',
     label: '性别',
@@ -75,8 +83,21 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.sex === 0 ? '男' : '女'
     },
+    fieldNames: { label: 'name', value: 'id' },
+    enum: computed(() => {
+      return SEXLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择性别' } },
   },
-  { prop: 'level', label: 'VIP等级', width: 100 },
+  {
+    prop: 'level',
+    label: 'VIP等级',
+    width: 100,
+    enum: computed(() => {
+      return VIPLEVEL || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
+  },
   { prop: 'account', label: '账户余额', width: 100 },
   {
     prop: 'onlineStatus',
@@ -102,17 +123,26 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'createTime', label: '注册时间', width: 180 },
+  {
+    prop: 'createTime',
+    label: '注册时间',
+    width: 180,
+    search: {
+      el: 'date-picker',
+      span: 2,
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   {
     prop: 'status',
     label: '状态',
-    width: 100,
+    width: 110,
     render: ({ row }) => {
       return (
         <el-switch
           v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+          active-text={row.status ? '启用' : '禁用'}
+          onClick={() => handleChangeStatus(row)}
         />
       )
     },
@@ -131,6 +161,20 @@ const openDialog = async (title: string) => {
       : hasAuth('btn.UserNormal.update2')
   await useAuth(isAuth)
   // 其他的逻辑
+}
+
+/** 修改状态 */
+const handleChangeStatus = async (row: any) => {
+  await useHandleData(
+    changeStatus,
+    {
+      type: 'normalUser',
+      id: row.id,
+      status: row.status == 1 ? 0 : 1,
+    },
+    `切换【${row.name}】用户状态`,
+  )
+  // proTable.value?.getTableList()
 }
 </script>
 

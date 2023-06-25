@@ -37,6 +37,16 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         meta: { title: '普通用户管理', icon: 'Grid' },
       },
       {
+        path: '/user/normal/show/:id',
+        component: () => import('@/views/user/normal/index.vue'),
+        meta: {
+          title: '普通用户管理详情',
+          isHide: true,
+          noAuth: true,
+          icon: 'Grid',
+        },
+      },
+      {
         path: '/user/creator/list',
         name: 'UserCreator',
         component: () => import('@/views/user/creator/index.vue'),
@@ -62,7 +72,55 @@ export const dynamicRoutes: RouteRecordRaw[] = [
       },
     ],
   },
-
+  // 内容管理
+  {
+    name: 'Content',
+    path: '/content',
+    component: Layout,
+    redirect: '/content/long-video',
+    meta: {
+      title: '内容管理',
+      icon: 'Menu',
+    },
+    children: [
+      {
+        name: 'LongVideo',
+        path: '/content/long-video',
+        component: () => import('@/views/content/longVideo/index.vue'),
+        meta: {
+          title: '长视频管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'ShortVideo',
+        path: '/content/short-video',
+        component: () => import('@/views/content/shortVideo/index.vue'),
+        meta: {
+          title: '短视频管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'Live',
+        path: '/content/live',
+        component: () => import('@/views/content/live/index.vue'),
+        meta: {
+          title: '直播管理',
+          icon: 'Grid',
+        },
+      },
+      {
+        name: 'Post',
+        path: '/content/post',
+        component: () => import('@/views/content/post/index.vue'),
+        meta: {
+          title: '帖子管理',
+          icon: 'Grid',
+        },
+      },
+    ],
+  },
   // 营销管理
   {
     name: 'MarketManager',
@@ -134,55 +192,6 @@ export const dynamicRoutes: RouteRecordRaw[] = [
     ],
   },
 
-  // 内容管理
-  {
-    name: 'Content',
-    path: '/content',
-    component: Layout,
-    redirect: '/content/long-video',
-    meta: {
-      title: '内容管理',
-      icon: 'Menu',
-    },
-    children: [
-      {
-        name: 'LongVideo',
-        path: '/content/long-video',
-        component: () => import('@/views/content/longVideo/index.vue'),
-        meta: {
-          title: '长视频管理',
-          icon: 'Grid',
-        },
-      },
-      {
-        name: 'ShortVideo',
-        path: '/content/short-video',
-        component: () => import('@/views/content/shortVideo/index.vue'),
-        meta: {
-          title: '短视频管理',
-          icon: 'Grid',
-        },
-      },
-      {
-        name: 'Live',
-        path: '/content/live',
-        component: () => import('@/views/content/live/index.vue'),
-        meta: {
-          title: '直播管理',
-          icon: 'Grid',
-        },
-      },
-      {
-        name: 'Post',
-        path: '/content/post',
-        component: () => import('@/views/content/post/index.vue'),
-        meta: {
-          title: '帖子管理',
-          icon: 'Grid',
-        },
-      },
-    ],
-  },
   // app管理
   {
     name: 'Application',

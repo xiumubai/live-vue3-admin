@@ -37,11 +37,12 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getManagerList } from '@/api/user/manager'
+import { SEXLIST } from '@/utils/constant'
 
 const { BUTTONS } = useAuthButtons()
 
@@ -67,7 +68,12 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'phone', label: '手机号', width: 140 },
+  {
+    prop: 'phone',
+    label: '手机号',
+    width: 140,
+    search: { el: 'input', props: { placeholder: '请输入手机号' } },
+  },
   {
     prop: 'sex',
     label: '性别',
@@ -75,6 +81,11 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.sex === 0 ? '男' : '女'
     },
+    fieldNames: { label: 'name', value: 'id' },
+    enum: computed(() => {
+      return SEXLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择性别' } },
   },
   {
     prop: 'onlineStatus',
@@ -88,19 +99,22 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'createTime', label: '创建时间', width: 180 },
+  {
+    prop: 'createTime',
+    label: '创建时间',
+    width: 180,
+    search: {
+      el: 'date-picker',
+      span: 2,
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   {
     prop: 'status',
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return (
-        <el-switch
-          v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-        />
-      )
+      return <el-switch v-model={row.status} />
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
