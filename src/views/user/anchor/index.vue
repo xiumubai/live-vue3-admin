@@ -90,7 +90,7 @@ const columns: ColumnProps[] = [
     width: 100,
     render: ({ row }) => {
       return row.onlineStatus === 0 ? (
-        <el-tag type="success">离线</el-tag>
+        <el-tag type="success">在线</el-tag>
       ) : (
         <el-tag type="info">离线</el-tag>
       )
@@ -123,13 +123,7 @@ const columns: ColumnProps[] = [
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return (
-        <el-switch
-          v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-        />
-      )
+      return <el-switch v-model={row.status} />
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },

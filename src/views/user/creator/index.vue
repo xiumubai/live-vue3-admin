@@ -104,7 +104,7 @@ const columns: ColumnProps[] = [
     width: 100,
     render: ({ row }) => {
       return row.onlineStatus === 0 ? (
-        <el-tag type="success">离线</el-tag>
+        <el-tag type="success">在线</el-tag>
       ) : (
         <el-tag type="info">离线</el-tag>
       )

@@ -83,13 +83,7 @@ const columns: ColumnProps[] = [
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return (
-        <el-switch
-          v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-        />
-      )
+      return <el-switch v-model={row.status} />
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
