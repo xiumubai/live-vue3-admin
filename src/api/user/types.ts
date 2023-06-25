@@ -21,6 +21,10 @@ export type Empty = '0' | '1'
 export namespace INormalMange {
   export interface IReqQuery extends ReqPage {
     name: string
+    phone: string
+    sex: string
+    level: string
+    createTime: string[]
   }
   export interface IResNormal {
     /**
