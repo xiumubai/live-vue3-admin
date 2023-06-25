@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-19 15:39:36
+ * @LastEditTime: 2023-06-25 10:52:54
  * @Description: 创作者管理
  */
 
@@ -18,8 +18,18 @@ import type { IManager } from './types'
  * @returns {<PageRes<IManager.IResManager>>}
  */
 export function getManagerList(params: IManager.IReqQuery) {
+  const startTime =
+    params.createTime && params.createTime.length > 0 && params.createTime[0]
+  const endTime =
+    params.createTime && params.createTime.length > 0 && params.createTime[1]
   return http.get<PageRes<IManager.IResManager>>(
     `/admin/user/manager/list/${params.pageSize}/${params.pageNum}`,
-    { name: params.name },
+    {
+      name: params.name,
+      phone: params.phone,
+      sex: params.sex,
+      startTime,
+      endTime,
+    },
   )
 }
