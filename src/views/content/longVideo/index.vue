@@ -37,18 +37,17 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getLongVideoList } from '@/api/content/longVideo'
-
+import { getLongVideoList, getClassList } from '@/api/content/longVideo'
+import { AUTHSTATUSLIST } from '@/utils/constant'
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 80 },
-  // { type: 'index', label: '#', width: 80 },
   { prop: 'id', label: 'Id', width: 80 },
   {
     prop: 'title',
@@ -78,8 +77,17 @@ const columns: ColumnProps[] = [
       return <el-button type="primary">播放</el-button>
     },
   },
-  { prop: 'category', label: '分类' },
-  { prop: 'author', label: '上传者' },
+  {
+    prop: 'category',
+    label: '分类',
+    enum: getClassList,
+    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
+  },
+  {
+    prop: 'author',
+    label: '上传者',
+    search: { el: 'input', props: { placeholder: '请输入上传者名称' } },
+  },
   { prop: 'phone', label: '手机号' },
   {
     prop: 'authStatus',
@@ -88,10 +96,30 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.authStatus === 0 ? '不通过' : '通过'
     },
+    enum: computed(() => {
+      return AUTHSTATUSLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
   },
   { prop: 'authName', label: '审核管理员', width: 120 },
-  { prop: 'uploadTime', label: '上传时间', width: 120 },
-  { prop: 'authTime', label: '审核时间', width: 120 },
+  {
+    prop: 'uploadTime',
+    label: '上传时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
+  {
+    prop: 'authTime',
+    label: '审核时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   {
     prop: 'status',
     label: '状态',

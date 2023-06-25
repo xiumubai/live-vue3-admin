@@ -18,9 +18,22 @@ export enum Sex {
  */
 export type Empty = '0' | '1'
 
+/**
+ * select
+ */
+export interface ISelectItem {
+  value: string
+  label: string
+}
+
 export namespace ILongVideo {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    author: string
+    authStatus: string
+    category: string
+    uploadTime: string[]
+    authTime: string[]
   }
   export interface IResLongVideo {
     /**

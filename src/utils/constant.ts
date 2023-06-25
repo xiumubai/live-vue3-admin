@@ -14,3 +14,12 @@ export const VIPLEVEL = [
   { value: 'VIP', label: 'VIP' },
   { value: 'SVIP', label: 'SVIP' },
 ]
+
+/**
+ * 审核状态
+ */
+export const AUTHSTATUSLIST = [
+  { value: '-1', label: '全部' },
+  { value: '1', label: '通过' },
+  { value: '0', label: '不通过' },
+]
