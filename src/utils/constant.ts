@@ -11,6 +11,7 @@ export const SEXLIST = [
  * vip等级
  */
 export const VIPLEVEL = [
+  { value: '-1', label: '全部' },
   { value: 'VIP', label: 'VIP' },
   { value: 'SVIP', label: 'SVIP' },
 ]
