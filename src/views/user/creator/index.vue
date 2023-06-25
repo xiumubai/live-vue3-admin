@@ -42,7 +42,7 @@ import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getCreatorList } from '@/api/user/creator'
-import { SEXLIST, VIPLEVEL } from '@/utils/constant'
+import { SEXLIST, CREATELEVEL } from '@/utils/constant'
 
 const { BUTTONS } = useAuthButtons()
 
@@ -92,9 +92,12 @@ const columns: ColumnProps[] = [
     label: '创作等级',
     width: 100,
     enum: computed(() => {
-      return VIPLEVEL || []
+      return CREATELEVEL || []
     }) as unknown as EnumProps[],
     search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
+    render: ({row}) => {
+      return <span>{row.level}</span>
+    }
   },
   { prop: 'longVideoNum', label: '长视频数量', width: 100 },
   { prop: 'shortVideoNum', label: '断视频数量', width: 100 },

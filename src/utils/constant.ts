@@ -17,6 +17,19 @@ export const VIPLEVEL = [
 ]
 
 /**
+ * 创作等级
+ */
+export const CREATELEVEL = [
+  { value: '-1', label: '全部' },
+  { value: '1', label: '一级' },
+  { value: '2', label: '二级' },
+  { value: '3', label: '三级' },
+  { value: '4', label: '四级' },
+  { value: '5', label: '五级' },
+  { value: '6', label: '六级' },
+]
+
+/**
  * 审核状态
  */
 export const AUTHSTATUSLIST = [
