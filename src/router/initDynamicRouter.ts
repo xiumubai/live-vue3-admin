@@ -115,6 +115,7 @@ function filterAsyncRoutes(
 ) {
   return dynamicRoutes.filter((route) => {
     // 1.如果route的name在routeNames中没有, 直接过滤掉
+    if (route?.meta?.noAuth) return true
     if (!authRouterList.includes(route.name as string)) return false
 
     // 2.如果当前route还有子路由(也就是有children), 需要对子路由也进行权限过滤

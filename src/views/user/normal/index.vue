@@ -136,7 +136,7 @@ const columns: ColumnProps[] = [
   {
     prop: 'status',
     label: '状态',
-    width: 100,
+    width: 110,
     render: ({ row }) => {
       return (
         <el-switch

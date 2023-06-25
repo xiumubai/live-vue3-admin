@@ -37,6 +37,16 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         meta: { title: '普通用户管理', icon: 'Grid' },
       },
       {
+        path: '/user/normal/show/:id',
+        component: () => import('@/views/user/normal/index.vue'),
+        meta: {
+          title: '普通用户管理详情',
+          isHide: true,
+          noAuth: true,
+          icon: 'Grid',
+        },
+      },
+      {
         path: '/user/creator/list',
         name: 'UserCreator',
         component: () => import('@/views/user/creator/index.vue'),
