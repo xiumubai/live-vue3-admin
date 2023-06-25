@@ -203,7 +203,13 @@ export namespace ILive {
 }
 
 export namespace IPost {
-  export type IReqQuery = ReqPage
+  export interface IReqQuery extends ReqPage {
+    title: string
+    author: string
+    authStatus: string
+    uploadTime: string[]
+    authTime: string[]
+  }
   export interface IResPost {
     /**
      * 审核管理员

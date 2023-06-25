@@ -37,11 +37,12 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getPostList } from '@/api/content/post'
+import { AUTHSTATUSLIST } from '@/utils/constant'
 
 const { BUTTONS } = useAuthButtons()
 
@@ -80,7 +81,11 @@ const columns: ColumnProps[] = [
   },
   { prop: 'typeName', label: '类型' },
   { prop: 'tagName', label: '标签' },
-  { prop: 'author', label: '发布者' },
+  {
+    prop: 'author',
+    label: '发布者',
+    search: { el: 'input', props: { placeholder: '请输入标题名称' } },
+  },
   { prop: 'phone', label: '手机号' },
   {
     prop: 'authStatus',
@@ -89,10 +94,30 @@ const columns: ColumnProps[] = [
     render: ({ row }) => {
       return row.authStatus === 0 ? '不通过' : '通过'
     },
+    enum: computed(() => {
+      return AUTHSTATUSLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
   },
   { prop: 'authName', label: '审核管理员', width: 120 },
-  { prop: 'uploadTime', label: '上传时间', width: 120 },
-  { prop: 'authTime', label: '审核时间', width: 120 },
+  {
+    prop: 'uploadTime',
+    label: '发布时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
+  {
+    prop: 'authTime',
+    label: '审核时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   {
     prop: 'status',
     label: '状态',
