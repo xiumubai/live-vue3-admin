@@ -51,10 +51,10 @@ const columns: ColumnProps[] = [
   { prop: 'id', label: 'UserId', width: 80, fixed: 'left' },
   {
     prop: 'name',
-    label: '用户名',
+    label: '演员名',
     fixed: 'left',
     width: 120,
-    search: { el: 'input', props: { placeholder: '请输入用户名' } },
+    search: { el: 'input', props: { placeholder: '请输入演员名' } },
   },
   {
     prop: 'avatar',
