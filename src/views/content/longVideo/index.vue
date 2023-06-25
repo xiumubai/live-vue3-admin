@@ -81,7 +81,10 @@ const columns: ColumnProps[] = [
     prop: 'category',
     label: '分类',
     enum: getClassList,
-    search: { el: 'select', props: { placeholder: '请选择VIP等级' } },
+    search: { el: 'select', props: { placeholder: '请选择分类' } },
+    render: ({ row }) => {
+      return <span>{row.category}</span>
+    },
   },
   {
     prop: 'author',
