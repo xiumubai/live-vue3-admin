@@ -23,3 +23,13 @@ export const AUTHSTATUSLIST = [
   { value: '1', label: '通过' },
   { value: '0', label: '不通过' },
 ]
+
+/**
+ * 直播状态
+ */
+
+export const LIVETATUSLIST = [
+  { value: '-1', label: '全部' },
+  { value: '1', label: '直播中' },
+  { value: '0', label: '已结束' },
+]

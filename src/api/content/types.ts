@@ -148,7 +148,9 @@ export namespace IShortVideo {
 
 export namespace ILive {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    liveStatus: string
+    startTime: string[]
   }
   export interface IResLive {
     /**
