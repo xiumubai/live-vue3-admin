@@ -27,8 +27,9 @@
           v-if="scope.row.status !== 1"
           type="primary"
           link
-          icon="Delete"
+          icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="handleView(scope.row.id)"
         >
           详情
         </el-button>
@@ -38,6 +39,7 @@
   </div>
 </template>
 <script setup lang="tsx">
+import type { INormalMange } from '@/api/user/types'
 import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
@@ -46,8 +48,9 @@ import { getNormalUserList, addNormalUser, updateNormalUser } from '@/api/user/n
 import { changeStatus } from '@/api/common/index'
 import { SEXLIST, VIPLEVEL } from '@/utils/constant'
 import { useHandleData } from '@/hooks/useHandleData'
-import type { INormalMange } from '@/api/user/types'
+import { useRouter } from 'vue-router'
 import Drawer from './components/Drawer.vue'
+const router = useRouter()
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -185,6 +188,13 @@ const handleChangeStatus = async (row: any) => {
     `切换【${row.name}】用户状态`,
   )
   // proTable.value?.getTableList()
+}
+
+// *查看详情
+const handleView = (id: number) => {
+  router.push({
+    path: `/user/normal/show/${id}`,
+  })
 }
 </script>
 

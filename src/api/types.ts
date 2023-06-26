@@ -1,5 +1,6 @@
 // * 分页请求参数
 export interface ReqPage {
+  id?: number
   pageNum: number
   pageSize: number
 }

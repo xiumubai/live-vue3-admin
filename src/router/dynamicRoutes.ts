@@ -38,7 +38,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
       },
       {
         path: '/user/normal/show/:id',
-        component: () => import('@/views/user/normal/index.vue'),
+        component: () => import('@/views/user/normal/show.vue'),
         meta: {
           title: '普通用户管理详情',
           isHide: true,
