@@ -100,6 +100,10 @@ export namespace ICreator {
     level: string
     createTime: string[]
   }
+  export interface UpdateModal {
+    id: string
+    level: string
+  }
   export interface IResCreator {
     /**
      * 头像

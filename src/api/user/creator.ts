@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-25 10:44:05
+ * @LastEditTime: 2023-06-26 11:19:50
  * @Description: 创作者管理
  */
 
@@ -33,4 +33,9 @@ export function getCreatorList(params: ICreator.IReqQuery) {
       endTime,
     },
   )
+}
+
+/** 编辑 */
+export function update(params: ICreator.UpdateModal) {
+  return http.put<PageRes<any>>(`/admin/user/creator/update`, params)
 }
