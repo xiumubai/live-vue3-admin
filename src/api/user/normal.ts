@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-25 10:26:45
+ * @LastEditTime: 2023-06-25 22:14:33
  * @Description: 普通用户管理
  */
 
@@ -33,4 +33,14 @@ export function getNormalUserList(params: INormalMange.IReqQuery) {
       endTime,
     },
   )
+}
+
+/** 新增用户 */
+export function addNormalUser(params: INormalMange.NormalUserModel) {
+  return http.post<PageRes<any>>(`/admin/user/normal/save`, params)
+}
+
+/** 编辑用户 */
+export function updateNormalUser(params: INormalMange.NormalUserModel) {
+  return http.put<PageRes<any>>(`/admin/user/normal/update`, params)
 }

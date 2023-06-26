@@ -63,6 +63,33 @@ export namespace INormalMange {
      */
     status: Empty
   }
+
+  export interface NormalUserModel {
+    /**
+     * 头像
+     */
+    avatar: string
+    /**
+     * id
+     */
+    id?: string
+    /**
+     * vip等级
+     */
+    level?: string
+    /**
+     * 用户名
+     */
+    name: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 性别
+     */
+    sex?: string
+  }
 }
 
 export namespace ICreator {
