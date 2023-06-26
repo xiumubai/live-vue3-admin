@@ -201,6 +201,10 @@ export namespace IAnchor {
     time: string
     birthday: string
     idCardUrl: never[]
+    status?: string
+    authRemark?: string
+    author?: string
+    authTime?: string
   }
 }
 

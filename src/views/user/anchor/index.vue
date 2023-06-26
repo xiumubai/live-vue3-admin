@@ -19,6 +19,7 @@
           link
           icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="handleView(scope.row.id)"
         >
           详情
         </el-button>
@@ -36,7 +37,10 @@ import { getAnchorList, doAuth, getAuth } from '@/api/user/anchor'
 import { changeStatus } from '@/api/common/index'
 import { SEXLIST } from '@/utils/constant'
 import { useHandleData } from '@/hooks/useHandleData'
+import { useRouter } from 'vue-router'
 import Dialog from './components/Dialog.vue'
+const router = useRouter()
+
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -174,6 +178,12 @@ const handleChangeStatus = async (row: any) => {
   )
   // 切换成功，请求接口
   // proTable.value?.getTableList()
+}
+// *查看详情
+const handleView = (id: number) => {
+  router.push({
+    path: `/user/anchor/show/${id}`,
+  })
 }
 </script>
 
