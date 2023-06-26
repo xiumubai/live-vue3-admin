@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-25 10:47:11
+ * @LastEditTime: 2023-06-26 16:45:19
  * @Description: 主播管理
  */
 
@@ -33,4 +33,14 @@ export function getAnchorList(params: IAnchor.IReqQuery) {
       endTime,
     },
   )
+}
+
+/** 主播认证信息 */
+export function getAuth(id: string) {
+  return http.get<IAnchor.IResAuth>(`/admin/user/anchor/getAuth/${id}`)
+}
+
+/** 主播认证 */
+export function doAuth(params: IAnchor.IDoAuth) {
+  return http.post<PageRes<any>>(`/admin/user/anchor/doAuth`, params)
 }

@@ -150,6 +150,11 @@ export namespace IAnchor {
     liveTimes: number
     createTime: string[]
   }
+  export interface IDoAuth {
+    id: string
+    status: string
+    remark: string
+  }
   export interface IResAnchor {
     /**
      * 账户余额
@@ -189,6 +194,13 @@ export namespace IAnchor {
      * 开启状态
      */
     status: Empty
+  }
+  export interface IResAuth {
+    name: string
+    remark: string
+    time: string
+    birthday: string
+    idCardUrl: never[]
   }
 }
 
