@@ -3,25 +3,25 @@
     <template #header>
       <el-page-header @back="goBack">
         <template #content>
-          <span class="text-large font-600 mr-3">【普通用户】详情页面</span>
+          <span class="text-large font-600 mr-3">【创作者】详情页面</span>
         </template>
       </el-page-header>
     </template>
     <el-tabs v-model="activeName">
-      <el-tab-pane label="上传视频" name="first">
+      <el-tab-pane label="长视频" name="first">
         <ProTable
           :columns="columns1"
           :toolButton="false"
           :initParam="initParam"
-          :requestApi="getVideoList"
+          :requestApi="getLongVideoList"
         ></ProTable>
       </el-tab-pane>
-      <el-tab-pane label="账户余额" name="second">
+      <el-tab-pane label="短视频" name="second">
         <ProTable
-          :columns="columns2"
+          :columns="columns1"
           :toolButton="false"
           :initParam="initParam"
-          :requestApi="getAccountList"
+          :requestApi="getShortVideoList"
         ></ProTable>
       </el-tab-pane>
     </el-tabs>
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { getVideoList, getAccountList } from '@/api/user/normal'
+import { getLongVideoList, getShortVideoList } from '@/api/user/creator'
 import { ColumnProps } from '@/components/ProTable/src/types'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
@@ -53,16 +53,6 @@ const columns1: ColumnProps[] = [
   { prop: 'time', label: '时长' },
   { prop: 'authStatus', label: '审核状态' },
   { prop: 'createTime', label: '添加时间' },
-]
-
-// *表格配置项
-const columns2: ColumnProps[] = [
-  { prop: 'id', label: 'ID', width: 80, fixed: 'left' },
-  { prop: 'type', label: '交易类型' },
-  { prop: 'amount', label: '交易金额' },
-  { prop: 'status', label: '交易状态' },
-  { prop: 'account', label: '实时余额' },
-  { prop: 'createTime', label: '交易时间' },
 ]
 </script>
 

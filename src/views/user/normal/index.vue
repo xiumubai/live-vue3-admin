@@ -44,7 +44,11 @@ import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getNormalUserList, addNormalUser, updateNormalUser } from '@/api/user/normal'
+import {
+  getNormalUserList,
+  addNormalUser,
+  updateNormalUser,
+} from '@/api/user/normal'
 import { changeStatus } from '@/api/common/index'
 import { SEXLIST, VIPLEVEL } from '@/utils/constant'
 import { useHandleData } from '@/hooks/useHandleData'
@@ -181,7 +185,7 @@ const handleChangeStatus = async (row: any) => {
   await useHandleData(
     changeStatus,
     {
-      type: 'normalUser',
+      type: 'creator',
       id: row.id,
       status: row.status == 1 ? 0 : 1,
     },

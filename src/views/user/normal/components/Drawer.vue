@@ -19,16 +19,18 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item
-        label="用户头像"
-        prop="avatar"
-      >
-        <UploadImg v-model:imageUrl="drawerProps.rowData!.avatar" width="135px" height="135px" :file-size="3">
+      <el-form-item label="用户头像" prop="avatar">
+        <UploadImg
+          v-model:imageUrl="drawerProps.rowData!.avatar"
+          width="135px"
+          height="135px"
+          :file-size="3"
+        >
           <template #empty>
             <el-icon><Avatar /></el-icon>
             <span>请上传头像</span>
           </template>
-          <template #tip> 头像大小不能超过 3M </template>
+          <template #tip>头像大小不能超过 3M</template>
         </UploadImg>
       </el-form-item>
 
@@ -95,12 +97,8 @@ const rules = reactive({
     { required: true, message: '请填写用户姓名' },
     { min: 2, message: '用户名不能小于2位' },
   ],
-  phone: [
-    { required: true, validator: checkPhoneNumber, trigger: "blur" },
-  ],
-  avatar: [
-    { required: true, message: '请上传用户头像' },
-  ],
+  phone: [{ required: true, validator: checkPhoneNumber, trigger: 'blur' }],
+  avatar: [{ required: true, message: '请上传用户头像' }],
 })
 
 // drawer框状态
@@ -113,7 +111,6 @@ const loading = ref<boolean>(false)
 
 // 接收父组件传过来的参数
 const acceptParams = (params: DrawerProps): void => {
-
   drawerProps.value = params
   drawerVisible.value = true
 }
