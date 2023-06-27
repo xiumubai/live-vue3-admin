@@ -182,15 +182,16 @@ export const dynamicRoutes: RouteRecordRaw[] = [
           icon: 'UserFilled',
         },
       },
-      {
-        name: 'VIPManager',
-        path: '/marketManager/vip',
-        component: () => import('@/views/market/vip/index.vue'),
-        meta: {
-          title: 'VIP设置',
-          icon: 'UserFilled',
-        },
-      },
+      // 暂时屏蔽
+      // {
+      //   name: 'VIPManager',
+      //   path: '/marketManager/vip',
+      //   component: () => import('@/views/market/vip/index.vue'),
+      //   meta: {
+      //     title: 'VIP设置',
+      //     icon: 'UserFilled',
+      //   },
+      // },
       // {
       //   name: 'ProxyManager',
       //   path: '/marketManager/proxyManager',
