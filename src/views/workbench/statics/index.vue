@@ -1,8 +1,10 @@
 <template>
-  <CartList></CartList>
-  <SalesTable></SalesTable>
-  <Resources></Resources>
-  <HotSearch></HotSearch>
+  <div>
+    <CartList></CartList>
+    <SalesTable></SalesTable>
+    <Resources></Resources>
+    <HotSearch></HotSearch>
+  </div>
 </template>
 
 <script setup lang="ts">
