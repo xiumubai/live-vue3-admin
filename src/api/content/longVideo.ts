@@ -2,7 +2,7 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-27 10:58:19
+ * @LastEditTime: 2023-06-27 16:21:17
  * @Description: 长视频管理
  */
 
@@ -70,4 +70,19 @@ export function getVideoPayList(params: ReqPage) {
       pageNum: params.pageNum,
     },
   )
+}
+
+/** 新增用户 */
+export function addLongVideo(params: ILongVideo.ILongVideoModal) {
+  return http.post<PageRes<any>>(`/admin/content/longVideo/save`, params)
+}
+
+/** 编辑用户 */
+export function updateLongVideo(params: ILongVideo.ILongVideoModal) {
+  return http.put<PageRes<any>>(`/admin/content/longVideo/update`, params)
+}
+
+/** 审批用户 */
+export function authLongVideo(params: ILongVideo.ILongVideoModal) {
+  return http.post<PageRes<any>>(`/admin/content/longVideo/auth`, params)
 }

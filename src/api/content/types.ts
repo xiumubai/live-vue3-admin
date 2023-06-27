@@ -35,6 +35,38 @@ export namespace ILongVideo {
     uploadTime: string[]
     authTime: string[]
   }
+
+  export interface ILongVideoModal {
+    id?: string
+    /**
+     * 分类
+     */
+    category?: string
+    /**
+     * 视频封面
+     */
+    postUrl: string
+    /**
+     * 视频价格
+     */
+    price?: string
+    /**
+     * 视频
+     */
+    src: string
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 审批状态
+     */
+    status?: string
+  }
   export interface IResLongVideo {
     /**
      * 审核管理员

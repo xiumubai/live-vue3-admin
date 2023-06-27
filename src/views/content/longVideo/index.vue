@@ -6,7 +6,7 @@
           type="primary"
           icon="Plus"
           :disabled="!BUTTONS['btn.UserNormal.add']"
-          @click="openDialog('新增')"
+          @click="openFormDialog('新增')"
         >
           新增
         </el-button>
@@ -19,7 +19,7 @@
           link
           icon="Edit"
           :disabled="!BUTTONS['btn.UserNormal.update']"
-          @click="openDialog('编辑')"
+          @click="openFormDialog('编辑', scope.row)"
         >
           编辑
         </el-button>
@@ -39,18 +39,20 @@
           link
           icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="openFormDialog('审核', scope.row)"
         >
           审核
         </el-button>
       </template>
     </ProTable>
     <PlayerDialog ref="PlayerDialogRef" />
+    <FormDialog ref="FormDialogRef" />
   </div>
 </template>
 <script setup lang="tsx">
 import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
-import { useAuth, hasAuth } from '@/hooks/useAuth'
+// import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { changeStatus } from '@/api/common/index'
 import { useHandleData } from '@/hooks/useHandleData'
@@ -58,6 +60,7 @@ import { getLongVideoList, getClassList } from '@/api/content/longVideo'
 import { AUTHSTATUSLIST } from '@/utils/constant'
 import { useRouter } from 'vue-router'
 import PlayerDialog from './components/PlayerDialog.vue'
+import FormDialog from './components/FormDialog.vue'
 const { BUTTONS } = useAuthButtons()
 const router = useRouter()
 
@@ -112,6 +115,7 @@ const columns: ColumnProps[] = [
     search: { el: 'input', props: { placeholder: '请输入上传者名称' } },
   },
   { prop: 'phone', label: '手机号' },
+  { prop: 'price', label: '视频价格', width: 100 },
   {
     prop: 'authStatus',
     label: '审核状态',
@@ -163,26 +167,26 @@ const columns: ColumnProps[] = [
 // *获取 ProTable 元素，调用其获取刷新数据方法
 const proTable = ref()
 
-const openDialog = async (title: string) => {
-  // 检查是否有操作权限
-  const isAuth =
-    title === '新增'
-      ? hasAuth('btn.UserNormal.add1')
-      : hasAuth('btn.UserNormal.update2')
-  await useAuth(isAuth)
-  // 其他的逻辑
-}
-
 const PlayerDialogRef = ref()
 /** 打开播放器弹窗 */
 const openPlayDialog = (src: string) => {
-  console.log(13)
-
   // 其他的逻辑
   let params = {
     src: src,
   }
   PlayerDialogRef.value.acceptParams(params)
+}
+
+/** 打开表单弹窗 */
+const FormDialogRef = ref()
+const openFormDialog = (title: string, row?: any) => {
+  // 其他的逻辑
+  let params = {
+    title,
+    rowData: { ...row },
+    getTableList: proTable.value?.getTableList,
+  }
+  FormDialogRef.value.acceptParams(params)
 }
 
 /** 修改状态 */
