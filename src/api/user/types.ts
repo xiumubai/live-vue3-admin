@@ -63,6 +63,33 @@ export namespace INormalMange {
      */
     status: Empty
   }
+
+  export interface NormalUserModel {
+    /**
+     * 头像
+     */
+    avatar: string
+    /**
+     * id
+     */
+    id?: string
+    /**
+     * vip等级
+     */
+    level?: string
+    /**
+     * 用户名
+     */
+    name: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 性别
+     */
+    sex?: string
+  }
 }
 
 export namespace ICreator {
@@ -72,6 +99,10 @@ export namespace ICreator {
     sex: string
     level: string
     createTime: string[]
+  }
+  export interface UpdateModal {
+    id: string
+    level: string
   }
   export interface IResCreator {
     /**
@@ -119,6 +150,11 @@ export namespace IAnchor {
     liveTimes: number
     createTime: string[]
   }
+  export interface IDoAuth {
+    id: string
+    status: string
+    remark: string
+  }
   export interface IResAnchor {
     /**
      * 账户余额
@@ -158,6 +194,17 @@ export namespace IAnchor {
      * 开启状态
      */
     status: Empty
+  }
+  export interface IResAuth {
+    name: string
+    remark: string
+    time: string
+    birthday: string
+    idCardUrl: never[]
+    status?: string
+    authRemark?: string
+    author?: string
+    authTime?: string
   }
 }
 

@@ -4,12 +4,12 @@
       <!-- 表格操作 -->
       <template #operation="scope">
         <el-button
-          v-if="scope.row.status !== 1"
+          v-if="scope.row.authStatus === 0"
           type="primary"
           link
-          icon="Edit"
+          icon="Unlock"
           :disabled="!BUTTONS['btn.UserNormal.update']"
-          @click="openDialog('编辑')"
+          @click="openDialog(scope.row.id)"
         >
           认证
         </el-button>
@@ -17,13 +17,15 @@
           v-if="scope.row.status !== 1"
           type="primary"
           link
-          icon="Delete"
+          icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="handleView(scope.row.id)"
         >
           详情
         </el-button>
       </template>
     </ProTable>
+    <Dialog ref="DialogRef" />
   </div>
 </template>
 <script setup lang="tsx">
@@ -31,15 +33,20 @@ import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getAnchorList } from '@/api/user/anchor'
+import { getAnchorList, doAuth, getAuth } from '@/api/user/anchor'
+import { changeStatus } from '@/api/common/index'
 import { SEXLIST } from '@/utils/constant'
+import { useHandleData } from '@/hooks/useHandleData'
+import { useRouter } from 'vue-router'
+import Dialog from './components/Dialog.vue'
+const router = useRouter()
 
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
 const columns: ColumnProps[] = [
   // { type: 'index', label: '#', width: 80 },
-  { prop: 'id', label: 'UserId', width: 80, fixed: 'left' },
+  { prop: 'id', label: 'ID', width: 80, fixed: 'left' },
   {
     prop: 'name',
     label: '用户名',
@@ -114,7 +121,6 @@ const columns: ColumnProps[] = [
     width: 180,
     search: {
       el: 'date-picker',
-      span: 2,
       props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
     },
   },
@@ -123,7 +129,13 @@ const columns: ColumnProps[] = [
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return <el-switch v-model={row.status} />
+      return (
+        <el-switch
+          v-model={row.status}
+          active-text={row.status ? '启用' : '禁用'}
+          onClick={() => handleChangeStatus(row)}
+        />
+      )
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
@@ -131,15 +143,47 @@ const columns: ColumnProps[] = [
 
 // *获取 ProTable 元素，调用其获取刷新数据方法
 const proTable = ref()
+const DialogRef = ref()
 
-const openDialog = async (title: string) => {
+const openDialog = async (id: string) => {
   // 检查是否有操作权限
-  const isAuth =
-    title === '新增'
-      ? hasAuth('btn.UserNormal.add1')
-      : hasAuth('btn.UserNormal.update2')
-  await useAuth(isAuth)
+  await useAuth(hasAuth('btn.UserNormal.update'))
   // 其他的逻辑
+
+  let params = {
+    id,
+    api: doAuth,
+    anchor: getAuthMsg(id),
+    getTableList: proTable.value?.getTableList,
+  }
+  DialogRef.value.acceptParams(params)
+}
+
+/** 获取认证信息 */
+const getAuthMsg = async (id: string) => {
+  const result = await getAuth(id)
+  return result.data
+}
+
+/** 修改状态 */
+const handleChangeStatus = async (row: any) => {
+  await useHandleData(
+    changeStatus,
+    {
+      type: 'normalUser',
+      id: row.id,
+      status: row.status == 1 ? 0 : 1,
+    },
+    `切换【${row.name}】用户状态`,
+  )
+  // 切换成功，请求接口
+  // proTable.value?.getTableList()
+}
+// *查看详情
+const handleView = (id: number) => {
+  router.push({
+    path: `/user/anchor/show/${id}`,
+  })
 }
 </script>
 

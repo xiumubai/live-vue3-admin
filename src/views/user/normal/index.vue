@@ -1,12 +1,12 @@
 <template>
   <div>
     <ProTable ref="proTable" :columns="columns" :requestApi="getNormalUserList">
-      <template #tableHeader>
+      <template #tableHeader="scope">
         <el-button
           type="primary"
           icon="Plus"
           :disabled="!BUTTONS['btn.UserNormal.add']"
-          @click="openDialog('新增')"
+          @click="openDialog('新增', scope.row)"
         >
           新增
         </el-button>
@@ -19,7 +19,7 @@
           link
           icon="Edit"
           :disabled="!BUTTONS['btn.UserNormal.update']"
-          @click="openDialog('编辑')"
+          @click="openDialog('编辑', scope.row)"
         >
           编辑
         </el-button>
@@ -27,25 +27,34 @@
           v-if="scope.row.status !== 1"
           type="primary"
           link
-          icon="Delete"
+          icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="handleView(scope.row.id)"
         >
           详情
         </el-button>
       </template>
     </ProTable>
+    <Drawer ref="drawerRef" />
   </div>
 </template>
 <script setup lang="tsx">
+import type { INormalMange } from '@/api/user/types'
 import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import { getNormalUserList } from '@/api/user/normal'
+import {
+  getNormalUserList,
+  addNormalUser,
+  updateNormalUser,
+} from '@/api/user/normal'
 import { changeStatus } from '@/api/common/index'
 import { SEXLIST, VIPLEVEL } from '@/utils/constant'
 import { useHandleData } from '@/hooks/useHandleData'
-// import type { INormalMange } from '@/api/user/types'
+import { useRouter } from 'vue-router'
+import Drawer from './components/Drawer.vue'
+const router = useRouter()
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -153,14 +162,22 @@ const columns: ColumnProps[] = [
 // *获取 ProTable 元素，调用其获取刷新数据方法
 const proTable = ref()
 
-const openDialog = async (title: string) => {
+const drawerRef = ref()
+const openDialog = async (title: string, row: INormalMange.IResNormal) => {
   // 检查是否有操作权限
   const isAuth =
     title === '新增'
-      ? hasAuth('btn.UserNormal.add1')
-      : hasAuth('btn.UserNormal.update2')
+      ? hasAuth('btn.UserNormal.add')
+      : hasAuth('btn.UserNormal.update')
   await useAuth(isAuth)
   // 其他的逻辑
+  let params = {
+    title,
+    rowData: { ...row },
+    api: title === '新增' ? addNormalUser : updateNormalUser,
+    getTableList: proTable.value?.getTableList,
+  }
+  drawerRef.value.acceptParams(params)
 }
 
 /** 修改状态 */
@@ -168,13 +185,20 @@ const handleChangeStatus = async (row: any) => {
   await useHandleData(
     changeStatus,
     {
-      type: 'normalUser',
+      type: 'creator',
       id: row.id,
       status: row.status == 1 ? 0 : 1,
     },
     `切换【${row.name}】用户状态`,
   )
   // proTable.value?.getTableList()
+}
+
+// *查看详情
+const handleView = (id: number) => {
+  router.push({
+    path: `/user/normal/show/${id}`,
+  })
 }
 </script>
 

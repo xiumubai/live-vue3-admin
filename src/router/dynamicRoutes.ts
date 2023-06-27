@@ -38,7 +38,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
       },
       {
         path: '/user/normal/show/:id',
-        component: () => import('@/views/user/normal/index.vue'),
+        component: () => import('@/views/user/normal/show.vue'),
         meta: {
           title: '普通用户管理详情',
           isHide: true,
@@ -53,10 +53,30 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         meta: { title: '创作者管理', icon: 'Grid' },
       },
       {
+        path: '/user/creator/show/:id',
+        component: () => import('@/views/user/creator/show.vue'),
+        meta: {
+          title: '创作者详情',
+          isHide: true,
+          noAuth: true,
+          icon: 'Grid',
+        },
+      },
+      {
         path: '/user/anchor/list',
         name: 'UserAnchor',
         component: () => import('@/views/user/anchor/index.vue'),
         meta: { title: '主播管理', icon: 'Grid' },
+      },
+      {
+        path: '/user/anchor/show/:id',
+        component: () => import('@/views/user/anchor/show.vue'),
+        meta: {
+          title: '主播详情',
+          isHide: true,
+          noAuth: true,
+          icon: 'Grid',
+        },
       },
       {
         path: '/user/manager/list',
