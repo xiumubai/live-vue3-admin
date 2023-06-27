@@ -41,6 +41,8 @@ import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
+import { changeStatus } from '@/api/common/index'
+import { useHandleData } from '@/hooks/useHandleData'
 import { getLongVideoList, getClassList } from '@/api/content/longVideo'
 import { AUTHSTATUSLIST } from '@/utils/constant'
 const { BUTTONS } = useAuthButtons()
@@ -128,7 +130,13 @@ const columns: ColumnProps[] = [
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return <el-switch v-model={row.status} />
+      return (
+        <el-switch
+          v-model={row.status}
+          active-text={row.status ? '启用' : '禁用'}
+          onClick={() => handleChangeStatus(row)}
+        />
+      )
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
@@ -145,6 +153,21 @@ const openDialog = async (title: string) => {
       : hasAuth('btn.UserNormal.update2')
   await useAuth(isAuth)
   // 其他的逻辑
+}
+
+/** 修改状态 */
+const handleChangeStatus = async (row: any) => {
+  await useHandleData(
+    changeStatus,
+    {
+      type: 'normalUser',
+      id: row.id,
+      status: row.status == 1 ? 0 : 1,
+    },
+    `切换【${row.title}】状态`,
+  )
+  // 切换成功，请求接口
+  // proTable.value?.getTableList()
 }
 </script>
 
