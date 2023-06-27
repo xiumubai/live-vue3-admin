@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import BaseChart from '@/views/workbench/statics/components/Resources/cpns/BaseChart.vue'
-const options = computed(() => {
+const options: any = computed(() => {
   return {
     tooltip: {
       trigger: 'axis',

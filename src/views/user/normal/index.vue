@@ -1,12 +1,12 @@
 <template>
   <div>
     <ProTable ref="proTable" :columns="columns" :requestApi="getNormalUserList">
-      <template #tableHeader="scope">
+      <template #tableHeader>
         <el-button
           type="primary"
           icon="Plus"
           :disabled="!BUTTONS['btn.UserNormal.add']"
-          @click="openDialog('新增', scope.row)"
+          @click="openDialog('新增')"
         >
           新增
         </el-button>
@@ -163,7 +163,7 @@ const columns: ColumnProps[] = [
 const proTable = ref()
 
 const drawerRef = ref()
-const openDialog = async (title: string, row: INormalMange.IResNormal) => {
+const openDialog = async (title: string, row?: INormalMange.IResNormal) => {
   // 检查是否有操作权限
   const isAuth =
     title === '新增'

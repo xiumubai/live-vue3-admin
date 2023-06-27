@@ -6,7 +6,7 @@
 import BaseChart from '@/views/workbench/statics/components/Resources/cpns/BaseChart.vue'
 import * as echarts from 'echarts'
 
-const options = {
+const options: any = {
   backgroundColor:
     'linear-gradient(90deg, rgba(7, 32, 39, 0.4) 0%, #1B302C 100%)',
   title: {

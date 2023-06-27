@@ -1,10 +1,10 @@
 <template>
-  <BaseChart :options="options"></BaseChart>
+  <BaseChart :options="options" :height="200" :width="200"></BaseChart>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import BaseChart from '@/views/workbench/statics/components/Resources/cpns/BaseChart.vue'
+import BaseChart from './BaseChart.vue'
 
 interface Props {
   pieText: string
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
   color: '#e6e9f0',
 })
 const total = ref(100)
-const options = computed(() => {
+const options: any = computed(() => {
   return {
     backgroundColor: '#fff',
     title: [

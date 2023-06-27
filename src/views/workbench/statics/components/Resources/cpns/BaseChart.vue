@@ -19,11 +19,15 @@ const props = defineProps<{
   width: number
   options: EChartsOption
 }>()
-const pie = ref('')
+const pie = ref()
 onMounted(() => {
-  const myChart = echarts.init(pie.value, null, {
-    renderer: 'canvas',
-  })
+  const myChart = echarts.init(
+    pie.value,
+    {},
+    {
+      renderer: 'canvas',
+    },
+  )
   myChart.setOption(props.options)
 })
 </script>

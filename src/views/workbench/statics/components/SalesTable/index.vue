@@ -40,10 +40,14 @@ const table1 = ref()
 const table2 = ref()
 onMounted(() => {
   // 基于准备好的dom，初始化echarts实例
-  const myChart1 = echarts.init(table1.value, null, {
-    width: 800,
-    height: 400,
-  })
+  const myChart1 = echarts.init(
+    table1.value,
+    {},
+    {
+      width: 800,
+      height: 400,
+    },
+  )
   // 绘制图表
   myChart1.setOption({
     title: {
@@ -66,10 +70,14 @@ onMounted(() => {
   })
 
   // 基于准备好的dom，初始化echarts实例
-  const myChart2 = echarts.init(table2.value, null, {
-    width: 600,
-    height: 400,
-  })
+  const myChart2 = echarts.init(
+    table2.value,
+    {},
+    {
+      width: 600,
+      height: 400,
+    },
+  )
   // 绘制图表
   myChart2.setOption({
     title: {

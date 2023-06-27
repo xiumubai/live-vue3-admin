@@ -23,7 +23,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
   {
     path: '/user',
     component: Layout,
-    redirect: '/base/dict/list',
+    redirect: '/user/normal/list',
     name: 'UserManage',
     meta: {
       title: '用户管理',
