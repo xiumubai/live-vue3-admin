@@ -14,7 +14,7 @@
       <!-- 表格操作 -->
       <template #operation="scope">
         <el-button
-          v-if="scope.row.status !== 1"
+          v-if="scope.row.authStatus === 1"
           type="primary"
           link
           icon="Edit"
@@ -24,13 +24,23 @@
           编辑
         </el-button>
         <el-button
-          v-if="scope.row.status !== 1"
+          v-if="scope.row.authStatus === 1"
           type="primary"
           link
-          icon="Delete"
+          icon="View"
+          :disabled="!BUTTONS['btn.UserNormal.view']"
+          @click="handleView(scope.row.id)"
+        >
+          详情
+        </el-button>
+        <el-button
+          v-if="scope.row.authStatus !== 1"
+          type="primary"
+          link
+          icon="View"
           :disabled="!BUTTONS['btn.UserNormal.view']"
         >
-          删除
+          审核
         </el-button>
       </template>
     </ProTable>
@@ -46,8 +56,10 @@ import { changeStatus } from '@/api/common/index'
 import { useHandleData } from '@/hooks/useHandleData'
 import { getLongVideoList, getClassList } from '@/api/content/longVideo'
 import { AUTHSTATUSLIST } from '@/utils/constant'
+import { useRouter } from 'vue-router'
 import PlayerDialog from './components/PlayerDialog.vue'
 const { BUTTONS } = useAuthButtons()
+const router = useRouter()
 
 // *表格配置项
 const columns: ColumnProps[] = [
@@ -186,6 +198,13 @@ const handleChangeStatus = async (row: any) => {
   )
   // 切换成功，请求接口
   // proTable.value?.getTableList()
+}
+
+// *查看详情
+const handleView = (id: number) => {
+  router.push({
+    path: `/content/long-video/show/${id}`,
+  })
 }
 </script>
 

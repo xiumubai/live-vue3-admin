@@ -2,12 +2,12 @@
  * @Author: 朽木白
  * @Date: 2023-06-16 15:41:27
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-06-25 14:02:12
+ * @LastEditTime: 2023-06-27 10:58:19
  * @Description: 长视频管理
  */
 
 import http from '@/utils/http'
-import type { PageRes } from '../types'
+import type { PageRes, ReqPage } from '../types'
 import type { ILongVideo, ISelectItem } from './types'
 
 /**
@@ -48,4 +48,26 @@ export function getLongVideoList(params: ILongVideo.IReqQuery) {
 /** 分类 */
 export function getClassList() {
   return http.get<PageRes<ISelectItem[]>>('/admin/content/longVideo/category')
+}
+
+/** 视频数据列表*/
+export function getVideoRecordList(params: ReqPage) {
+  return http.get<PageRes<any>>(
+    `/admin/content/longVideo/videoRecordList/${params.id}`,
+    {
+      pageSize: params.pageSize,
+      pageNum: params.pageNum,
+    },
+  )
+}
+
+/** 视频付费列表*/
+export function getVideoPayList(params: ReqPage) {
+  return http.get<PageRes<any>>(
+    `/admin/content/longVideo/videoPayList/${params.id}`,
+    {
+      pageSize: params.pageSize,
+      pageNum: params.pageNum,
+    },
+  )
 }
