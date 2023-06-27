@@ -34,6 +34,7 @@
         </el-button>
       </template>
     </ProTable>
+    <PlayerDialog ref="PlayerDialogRef" />
   </div>
 </template>
 <script setup lang="tsx">
@@ -45,6 +46,7 @@ import { changeStatus } from '@/api/common/index'
 import { useHandleData } from '@/hooks/useHandleData'
 import { getLongVideoList, getClassList } from '@/api/content/longVideo'
 import { AUTHSTATUSLIST } from '@/utils/constant'
+import PlayerDialog from './components/PlayerDialog.vue'
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -75,8 +77,12 @@ const columns: ColumnProps[] = [
     prop: 'src',
     label: '视频',
     width: 100,
-    render: () => {
-      return <el-button type="primary">播放</el-button>
+    render: ({ row }) => {
+      return (
+        <el-button type="primary" onClick={() => openPlayDialog(row.src)}>
+          播放
+        </el-button>
+      )
     },
   },
   {
@@ -153,6 +159,18 @@ const openDialog = async (title: string) => {
       : hasAuth('btn.UserNormal.update2')
   await useAuth(isAuth)
   // 其他的逻辑
+}
+
+const PlayerDialogRef = ref()
+/** 打开播放器弹窗 */
+const openPlayDialog = (src: string) => {
+  console.log(13)
+
+  // 其他的逻辑
+  let params = {
+    src: src,
+  }
+  PlayerDialogRef.value.acceptParams(params)
 }
 
 /** 修改状态 */
