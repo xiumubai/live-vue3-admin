@@ -59,10 +59,9 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { getLiveRecordList } from '@/api/user/anchor'
+import { getLiveRecordList, getAuthDetail } from '@/api/user/anchor'
 import { ColumnProps } from '@/components/ProTable/src/types'
 import { useRoute, useRouter } from 'vue-router'
-import { getAuthDetail } from '@/api/user/anchor'
 
 const route = useRoute()
 const router = useRouter()
