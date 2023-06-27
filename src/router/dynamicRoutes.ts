@@ -113,6 +113,16 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        path: '/content/long-video/show/:id',
+        component: () => import('@/views/content/longVideo/show.vue'),
+        meta: {
+          title: '视频详情',
+          isHide: true,
+          noAuth: true,
+          icon: 'Grid',
+        },
+      },
+      {
         name: 'ShortVideo',
         path: '/content/short-video',
         component: () => import('@/views/content/shortVideo/index.vue'),
