@@ -37,7 +37,7 @@ export namespace INormalMange {
      */
     avatar: string
     createTime?: string
-    id?: string
+    id: string
     /**
      * VIP等级
      */

@@ -1,7 +1,7 @@
 <template>
   <div>
     <ProTable ref="proTable" :columns="columns" :requestApi="getNormalUserList">
-      <template #tableHeader>
+      <template #tableHeader="scope">
         <el-button
           type="primary"
           icon="Plus"
@@ -9,6 +9,22 @@
           @click="openDialog('新增')"
         >
           新增
+        </el-button>
+
+        <el-button type="primary" icon="Upload" plain @click="batchAdd">
+          导入
+        </el-button>
+        <el-button type="primary" icon="Download" plain @click="downloadFile">
+          导出
+        </el-button>
+        <el-button
+          type="danger"
+          icon="Delete"
+          plain
+          @click="batchDelete(scope.selectedListIds)"
+          :disabled="!scope.isSelected"
+        >
+          批量删除
         </el-button>
       </template>
       <!-- 表格操作 -->
@@ -24,6 +40,15 @@
           编辑
         </el-button>
         <el-button
+          type="primary"
+          link
+          icon="Delete"
+          :disabled="!BUTTONS['btn.UserNormal.update']"
+          @click="handleDelete(scope.row)"
+        >
+          删除
+        </el-button>
+        <el-button
           v-if="scope.row.status !== 1"
           type="primary"
           link
@@ -36,6 +61,7 @@
       </template>
     </ProTable>
     <Drawer ref="drawerRef" />
+    <ImportExcel ref="dialogRef" />
   </div>
 </template>
 <script setup lang="tsx">
@@ -44,22 +70,30 @@ import { ref, computed } from 'vue'
 import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
-import {
-  getNormalUserList,
-  addNormalUser,
-  updateNormalUser,
-} from '@/api/user/normal'
 import { changeStatus } from '@/api/common/index'
 import { SEXLIST, VIPLEVEL } from '@/utils/constant'
 import { useHandleData } from '@/hooks/useHandleData'
 import { useRouter } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
+import { exportExcel } from '@/utils/exprotExcel'
+import {
+  getNormalUserList,
+  addNormalUser,
+  updateNormalUser,
+  deleteUserById,
+  batchUser,
+  // exportUserInfo,
+  downLoadExcelTemp,
+  ImportUserInfo,
+} from '@/api/user/normal'
 import Drawer from './components/Drawer.vue'
+import ImportExcel from './components/ImportExcel.vue'
 const router = useRouter()
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
 const columns: ColumnProps[] = [
-  // { type: 'index', label: '#', width: 80 },
+  { type: 'selection', fixed: 'left', width: 80 },
   { prop: 'id', label: 'UserId', width: 80, fixed: 'left' },
   {
     prop: 'name',
@@ -156,7 +190,7 @@ const columns: ColumnProps[] = [
       )
     },
   },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 180 },
+  { prop: 'operation', label: '操作', fixed: 'right', width: 220 },
 ]
 
 // *获取 ProTable 元素，调用其获取刷新数据方法
@@ -194,11 +228,59 @@ const handleChangeStatus = async (row: any) => {
   // proTable.value?.getTableList()
 }
 
-// *查看详情
+/** 根据id删除用户 */
+const handleDelete = async (row: INormalMange.IResNormal) => {
+  await useHandleData(deleteUserById, row.id, `删除${row.name}用户`)
+  proTable.value?.getTableList()
+}
+
+// *批量删除用户
+const batchDelete = async (ids: string[]) => {
+  await useHandleData(batchUser, ids, '删除所选用户信息')
+  proTable.value?.clearSelection()
+  proTable.value?.getTableList()
+}
+
+/** 查看详情 */
 const handleView = (id: number) => {
   router.push({
     path: `/user/normal/show/${id}`,
   })
+}
+
+/** 导出 */
+const downloadFile = () => {
+  ElMessageBox.confirm('确认导出用户数据?', '温馨提示', {
+    type: 'warning',
+  }).then(async () => {
+    // 导出根据查询参数，带分页
+    // 第一种方式：根据接口导出
+    // const res = await exportUserInfo({
+    //   ...proTable.value?.searchParam,
+    //   ...proTable.value?.pageable,
+    // })
+
+    const format = ref('xlsx')
+    exportExcel({
+      column: columns,
+      data: proTable.value?.tableData, // 表格渲染数据
+      filename: '导出 excel',
+      format: format.value,
+      autoWidth: true,
+    })
+  })
+}
+/** 批量添加用户 */
+const dialogRef = ref()
+const batchAdd = () => {
+  let params = {
+    title: '用户',
+    columns,
+    tempApi: downLoadExcelTemp, // 模板下载数据
+    importApi: ImportUserInfo, // 导入请求接口
+    getTableList: proTable.value.getTableList,
+  }
+  dialogRef.value.acceptParams(params)
 }
 </script>
 
