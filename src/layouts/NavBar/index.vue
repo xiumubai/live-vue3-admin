@@ -3,7 +3,7 @@
  * @Autor: 李海波
  * @Date: 2023-03-03 13:41:05
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-03-15 17:20:10
+ * @LastEditTime: 2023-06-30 08:44:13
 -->
 <template>
   <div class="nav-bar-container">
@@ -19,6 +19,7 @@
       <el-col :sm="12" :md="12" :lg="12" :xl="12">
         <div class="right-panel">
           <Refresh />
+          <Lock />
           <ScreenFull />
           <Settings />
           <User />
@@ -36,6 +37,7 @@ import Breadcrumb from './components/Breadcrumb/index.vue'
 import Refresh from './components/Refresh/index.vue'
 import ScreenFull from './components/ScreeFull/index.vue'
 import Settings from './components/Settings/index.vue'
+import Lock from './components/Lock/index.vue'
 export default defineComponent({
   components: {
     Refresh,
@@ -43,6 +45,7 @@ export default defineComponent({
     ScreenFull,
     Breadcrumb,
     Settings,
+    Lock,
   },
   setup() {
     const settingsStore = useSettingsStore()
