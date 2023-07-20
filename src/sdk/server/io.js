@@ -1,5 +1,6 @@
 import { createServer } from 'http'
 import { Server } from 'socket.io'
+// 此文件如无法 在项目中 cd 进去使用的时候， 可自己搞一个
 const connectList = ['']
 
 const testRoomList = []

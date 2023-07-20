@@ -3,7 +3,7 @@
  * @Autor: codeBo
  * @Date: 2023-06-21 10:21:18
  * @LastEditors: gjzxlihaibo@163.com
- * @LastEditTime: 2023-06-21 10:27:23
+ * @LastEditTime: 2023-06-25 14:01:26
  */
 import io from 'socket.io-client'
 // 实例化 io 类
@@ -12,7 +12,7 @@ class socketIO {
   constructor(opt: { url: string; query: any }) {
     // 最新版直接使用 io 调用，不需要使用 io.connnet ， 第一个参数是 url ，第二个参数是配置项 后端可通过 on connection 事件 参数中 解构出来 handshake 读取
     this.socket = io(opt.url, {
-      reconnection: true,
+      reconnection: true, // 是否从新链接 默认 true
       transports: ['websocket'],
       query: opt.query || {},
     })
