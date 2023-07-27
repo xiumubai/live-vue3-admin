@@ -37,12 +37,12 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { ColumnProps } from '@/components/ProTable/src/types'
+import { ref, computed } from 'vue'
+import { ColumnProps, EnumProps } from '@/components/ProTable/src/types'
 import { useAuth, hasAuth } from '@/hooks/useAuth'
 import { useAuthButtons } from '@/hooks/useAuthButtons'
 import { getLiveList } from '@/api/content/live'
-
+import { LIVETATUSLIST } from '@/utils/constant'
 const { BUTTONS } = useAuthButtons()
 
 // *表格配置项
@@ -92,22 +92,28 @@ const columns: ColumnProps[] = [
         <el-tag type="primary">直播中</el-tag>
       )
     },
+    enum: computed(() => {
+      return LIVETATUSLIST || []
+    }) as unknown as EnumProps[],
+    search: { el: 'select', props: { placeholder: '请选择直播状态' } },
   },
   { prop: 'account', label: '直播收益', width: 120 },
-  { prop: 'startTime', label: '开播时间', width: 120 },
+  {
+    prop: 'startTime',
+    label: '开播时间',
+    width: 120,
+    search: {
+      el: 'date-picker',
+      props: { type: 'datetimerange', valueFormat: 'YYYY-MM-DD HH:mm:ss' },
+    },
+  },
   { prop: 'endTime', label: '结束时间', width: 120 },
   {
     prop: 'status',
     label: '状态',
     width: 100,
     render: ({ row }) => {
-      return (
-        <el-switch
-          v-model={row.status}
-          class="ml-2"
-          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
-        />
-      )
+      return <el-switch v-model={row.status} />
     },
   },
   { prop: 'operation', label: '操作', fixed: 'right', width: 180 },

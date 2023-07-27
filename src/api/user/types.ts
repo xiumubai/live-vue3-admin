@@ -21,6 +21,10 @@ export type Empty = '0' | '1'
 export namespace INormalMange {
   export interface IReqQuery extends ReqPage {
     name: string
+    phone: string
+    sex: string
+    level: string
+    createTime: string[]
   }
   export interface IResNormal {
     /**
@@ -33,7 +37,7 @@ export namespace INormalMange {
      */
     avatar: string
     createTime?: string
-    id?: number
+    id: string
     /**
      * VIP等级
      */
@@ -59,11 +63,46 @@ export namespace INormalMange {
      */
     status: Empty
   }
+
+  export interface NormalUserModel {
+    /**
+     * 头像
+     */
+    avatar: string
+    /**
+     * id
+     */
+    id?: string
+    /**
+     * vip等级
+     */
+    level?: string
+    /**
+     * 用户名
+     */
+    name: string
+    /**
+     * 手机号
+     */
+    phone: string
+    /**
+     * 性别
+     */
+    sex?: string
+  }
 }
 
 export namespace ICreator {
   export interface IReqQuery extends ReqPage {
     name: string
+    phone: string
+    sex: string
+    level: string
+    createTime: string[]
+  }
+  export interface UpdateModal {
+    id: string
+    level: string
   }
   export interface IResCreator {
     /**
@@ -106,6 +145,15 @@ export namespace ICreator {
 export namespace IAnchor {
   export interface IReqQuery extends ReqPage {
     name: string
+    phone: string
+    sex: string
+    liveTimes: number
+    createTime: string[]
+  }
+  export interface IDoAuth {
+    id: string
+    status: string
+    remark: string
   }
   export interface IResAnchor {
     /**
@@ -147,11 +195,25 @@ export namespace IAnchor {
      */
     status: Empty
   }
+  export interface IResAuth {
+    name: string
+    remark: string
+    time: string
+    birthday: string
+    idCardUrl: never[]
+    status?: string
+    authRemark?: string
+    author?: string
+    authTime?: string
+  }
 }
 
 export namespace IManager {
   export interface IReqQuery extends ReqPage {
     name: string
+    phone: string
+    sex: string
+    createTime: string[]
   }
 
   export interface IResManager {

@@ -1,13 +1,13 @@
 /*
  * @Author: 李海波
  * @Date: 2023-03-10 11:31:11
- * @LastEditors: gjzxlihaibo@163.com
- * @LastEditTime: 2023-06-16 13:53:42
+ * @LastEditors: 1547702880@@qq.com
+ * @LastEditTime: 2023-06-27 16:43:14
  * @Description: vip设置页面
  */
 import http from '@/utils/http'
 import type { PageRes } from '../types'
-import type { Permission } from './types'
+import type { Permission } from '../acl/types'
 
 /**
  * @description 查看某个角色权限列表

@@ -6,6 +6,8 @@ import { ProTable } from './ProTable'
 import { Auth } from './Auth'
 import { SwitchDark } from './SwitchDark'
 import { IconifyIcon } from './IconifyIcon'
+import { UploadImgs, UploadImg } from './Upload'
+import { ScreenLock } from './ScreenLock'
 
 const Components: {
   [propName: string]: Component
@@ -16,6 +18,9 @@ const Components: {
   Auth,
   SwitchDark,
   IconifyIcon,
+  UploadImgs,
+  UploadImg,
+  ScreenLock,
 }
 
 export default {

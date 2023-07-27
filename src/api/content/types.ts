@@ -18,9 +18,54 @@ export enum Sex {
  */
 export type Empty = '0' | '1'
 
+/**
+ * select
+ */
+export interface ISelectItem {
+  value: string
+  label: string
+}
+
 export namespace ILongVideo {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    author: string
+    authStatus: string
+    category: string
+    uploadTime: string[]
+    authTime: string[]
+  }
+
+  export interface ILongVideoModal {
+    id?: string
+    /**
+     * 分类
+     */
+    category?: string
+    /**
+     * 视频封面
+     */
+    postUrl: string
+    /**
+     * 视频价格
+     */
+    price?: string
+    /**
+     * 视频
+     */
+    src: string
+    /**
+     * 标题
+     */
+    title: string
+    /**
+     * 备注
+     */
+    remark?: string
+    /**
+     * 审批状态
+     */
+    status?: string
   }
   export interface IResLongVideo {
     /**
@@ -75,7 +120,12 @@ export namespace ILongVideo {
 
 export namespace IShortVideo {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    author: string
+    authStatus: string
+    tagName: string
+    uploadTime: string[]
+    authTime: string[]
   }
   export interface IResShortVideo {
     /**
@@ -130,7 +180,9 @@ export namespace IShortVideo {
 
 export namespace ILive {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    liveStatus: string
+    startTime: string[]
   }
   export interface IResLive {
     /**
@@ -184,7 +236,11 @@ export namespace ILive {
 
 export namespace IPost {
   export interface IReqQuery extends ReqPage {
-    name: string
+    title: string
+    author: string
+    authStatus: string
+    uploadTime: string[]
+    authTime: string[]
   }
   export interface IResPost {
     /**

@@ -3,7 +3,7 @@
  * @Autor: 李海波
  * @Date: 2023-03-02 17:50:49
  * @LastEditors: 1547702880@@qq.com
- * @LastEditTime: 2023-03-17 17:41:03
+ * @LastEditTime: 2023-06-27 16:34:27
 -->
 <template>
   <div class="tabs-bar-container">
@@ -16,7 +16,7 @@
       >
         <template v-for="item in visitedViews" :key="item.path">
           <el-tab-pane
-            v-if="item.meta.isHide !== true"
+            v-if="item?.meta?.isHide !== true"
             type="card"
             :path="item.path"
             :label="item.title"
